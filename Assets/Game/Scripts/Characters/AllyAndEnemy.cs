@@ -1,0 +1,189 @@
+﻿using Lean.Pool;
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public enum AllyAndEnemyType
+{
+    CloseRange = 0,
+    LongRange = 1,
+    Healing = 2,
+    Boss = 3
+}
+public enum Faction
+{
+    Enemy = 0,
+    Ally = 1
+}
+public class AllyAndEnemy : Character
+{
+    
+    [SerializeField] private GameObject getTarget;
+    [SerializeField] private AttackCollider attackCollider;
+    [SerializeField] private Bullet bullet;
+    private IState currentState;
+    private bool canAttack;
+
+    
+    public float delayTime;
+    public AllyAndEnemyType AEType;
+    
+
+
+    private void Start()
+    {
+        ChangeState(new MoveState());
+        OnInit();
+    }
+
+    private void FixedUpdate()
+    {
+        if (currentState != null)
+        {
+            currentState.OnExcute(this);
+        }
+        target = FindTarget();
+        //if (target != null)
+        //{
+        //    getTarget.SetActive(false);
+        //}
+        //if (target == null)
+        //{
+        //    getTarget.SetActive(true);
+        //}
+    }
+
+    private void Despawn()
+    {
+        LeanPool.Despawn(this);
+    }
+    protected override void Dead()
+    {
+        base.Dead();
+        Invoke(nameof(Despawn), 1.5f);
+        this.GetComponent<Collider2D>().enabled = false;
+        ChangeState(null);
+        speed = 0;
+    }
+
+    public void Move()
+    {
+        ChangeAnim("Run");
+        //rb.velocity = transform.right * speed;
+        if (this.faction == Faction.Enemy)
+        {
+            rb.velocity = Vector2.left * speed;
+        }
+        if (this.faction == Faction.Ally)
+        {
+            rb.velocity = Vector2.right * speed;
+        }
+
+    }
+
+
+    public void StopMoving()
+    {
+        ChangeAnim("Idle");
+        rb.velocity = Vector2.zero;
+    }
+
+    public void Attack()
+    {
+        ChangeAnim("Attack");
+        if (this.AEType == AllyAndEnemyType.CloseRange)
+        {
+            SetAttack();
+            Invoke(nameof(ResetAttack), 0.5f);
+        }
+        if (this.AEType == AllyAndEnemyType.Healing)
+        {
+            Invoke(nameof(Shoot), 1f);
+        }
+        if (this.AEType == AllyAndEnemyType.LongRange)
+        {
+            Invoke(nameof(Shoot), 0.75f);
+        }
+
+    }
+    private void Shoot()
+    {
+        Bullet b = LeanPool.Spawn(bullet, throwPoint.position, throwPoint.rotation);
+        b.attacker = this;
+    }
+
+    private void Slash()
+    {
+
+    }
+    public bool TargetInAttackRange()
+    {
+        if (target !=null && Vector2.Distance(target.transform.position , transform.position) < attackRange)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    public override void SetTarget(Character character)
+    {
+        base.SetTarget(character);
+
+        if (TargetInAttackRange())
+        {
+            ChangeState(new AttackState());
+        }
+
+    }
+ 
+    
+    //public override Character FindTarget()
+    //{
+    //    Character target = null;
+    //    for (int i = 0; i < targets.Count; i++)
+    //    {
+    //        if (targets[i] != null && Vector2.Distance(targets[i].transform.position, transform.position) < attackRange)
+    //        {
+    //            target = targets[i];
+    //        }
+    //    }
+    //    return target;
+    //}
+
+    public void ChangeState(IState newState)
+    {
+        //khi đổi sang state mới, check xem state cũ có = null ko
+        if (currentState != null)
+        {
+            currentState.OnExit(this);
+        }
+        currentState = newState;
+
+        if (currentState != null)
+        {
+            currentState.OnEnter(this);
+        }
+    }
+
+    private void ResetAttack()
+    {
+        attackCollider.gameObject.SetActive(true);
+    }
+
+    private void SetAttack()
+    {
+        attackCollider.gameObject.SetActive(false);
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.tag == "Attack Collider")
+        {
+            //ChangeAnim("Hurt");
+        }
+    }
+
+}
