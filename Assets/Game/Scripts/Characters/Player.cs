@@ -98,21 +98,21 @@ public class Player : Character
             Attack("Shoot");
         }
 
-        if (Input.GetKeyDown(KeyCode.Alpha1) && canCallAlly1 == true)
+        if (Input.GetKey(KeyCode.Alpha1) && canCallAlly1 == true)
         {
             //Invoke(nameof(SpawnAlly1), allies[0].delayTime);
             StartCoroutine(SpawnAlly1());
             canCallAlly1 = false;
         }
 
-        if (Input.GetKeyDown(KeyCode.Alpha2) && canCallAlly2 == true)
+        if (Input.GetKey(KeyCode.Alpha2) && canCallAlly2 == true)
         {
             //Invoke(nameof(SpawnAlly2), allies[1].delayTime);
             StartCoroutine(SpawnAlly2());
             canCallAlly2 = false;
         }
 
-        if (Input.GetKeyDown(KeyCode.Alpha3) && canCallAlly3 == true)
+        if (Input.GetKey(KeyCode.Alpha3) && canCallAlly3 == true)
         {
             //Invoke(nameof(SpawnAlly3), allies[2].delayTime);
             StartCoroutine(SpawnAlly3());
@@ -164,7 +164,7 @@ public class Player : Character
         //Instantiate(allies[0], spawnPoint.position, spawnPoint.rotation);
         yield return new WaitForSeconds(allies[0].delayTime);
         //Instantiate(allies[0], spawnPos, spawnPoint.rotation);
-        LeanPool.Spawn(allies[0], spawnPos, spawnPoint.rotation);
+        AllyAndEnemy ally = Instantiate(allies[0], spawnPos, Quaternion.Euler(Vector3.zero));
         canCallAlly1 = true;
 
     }
@@ -173,7 +173,7 @@ public class Player : Character
     {
         yield return new WaitForSeconds(allies[1].delayTime);
         //Instantiate(allies[1], spawnPos, spawnPoint.rotation);
-        LeanPool.Spawn(allies[1], spawnPos, spawnPoint.rotation);
+        AllyAndEnemy ally = Instantiate(allies[1], spawnPos, Quaternion.Euler(Vector3.zero));
         canCallAlly2 = true;
 
     }
@@ -182,7 +182,7 @@ public class Player : Character
     {
         yield return new WaitForSeconds(allies[2].delayTime);
         //Instantiate(allies[2], spawnPos, spawnPoint.rotation);
-        LeanPool.Spawn(allies[2], spawnPos, spawnPoint.rotation);
+        AllyAndEnemy ally = Instantiate(allies[2], spawnPos, Quaternion.Euler(Vector3.zero));
         canCallAlly3 = true;
 
     }

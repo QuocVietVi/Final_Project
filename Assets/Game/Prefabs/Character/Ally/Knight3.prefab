@@ -172,6 +172,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   allyAndEnemy: {fileID: 2161179833904150411}
+  player: {fileID: 0}
 --- !u!1 &2080658488191775983
 GameObject:
   m_ObjectHideFlags: 0
@@ -290,7 +291,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0.07608321, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -301,7 +302,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 1.4564984, y: 1}
   m_EdgeRadius: 0
 --- !u!114 &2493115331066028224
 MonoBehaviour:
@@ -316,6 +317,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attacker: {fileID: 2161179833904150411}
+  victim: {fileID: 0}
 --- !u!1 &4539153115208233499
 GameObject:
   m_ObjectHideFlags: 0
@@ -430,16 +432,16 @@ MonoBehaviour:
   rb: {fileID: 4374879180963959093}
   anim: {fileID: 870477262193924273}
   speed: 3
-  maxHp: 0
+  maxHp: 300
   throwPoint: {fileID: 0}
+  attackRange: 2
+  target: {fileID: 0}
   bulletDamage: 0
   slashDamage: 0
   faction: 1
-  attackRange: 2
   getTarget: {fileID: 818081990750195965}
-  attackArea: {fileID: 0}
+  attackCollider: {fileID: 0}
   bullet: {fileID: 0}
-  target: {fileID: 0}
   delayTime: 0
   AEType: 0
 --- !u!1001 &8796597337310162230

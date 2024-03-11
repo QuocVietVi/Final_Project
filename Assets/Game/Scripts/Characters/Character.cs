@@ -35,7 +35,7 @@ public class Character : MonoBehaviour
         }
     }
 
-    protected virtual void OnInit()
+    public virtual void OnInit()
     {
         hp = maxHp;
     }
@@ -52,7 +52,6 @@ public class Character : MonoBehaviour
     protected virtual void Dead()
     {
         ChangeAnim("Die");
-        speed = 0;
     }
 
     public void OnHit(float damage)

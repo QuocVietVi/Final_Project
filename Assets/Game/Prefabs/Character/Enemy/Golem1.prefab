@@ -286,13 +286,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rb: {fileID: 3683566680857015841}
   anim: {fileID: 5621028159639478523}
-  speed: 3
+  speed: 2
   maxHp: 100
   throwPoint: {fileID: 0}
-  attackRange: 1.25
+  attackRange: 1.5
   target: {fileID: 0}
   bulletDamage: 0
-  slashDamage: 10
+  slashDamage: 20
   faction: 0
   getTarget: {fileID: 1633570886431686369}
   attackCollider: {fileID: 2641238422298892160}
@@ -417,7 +417,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0.042150974}
+  m_Offset: {x: 0.40130484, y: 0.042150974}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -428,7 +428,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 2.0959232}
+  m_Size: {x: 1.8026097, y: 2.0959232}
   m_EdgeRadius: 0
 --- !u!114 &2641238422298892160
 MonoBehaviour:

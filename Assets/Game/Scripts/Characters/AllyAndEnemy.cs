@@ -32,17 +32,24 @@ public class AllyAndEnemy : Character
 
     private void Start()
     {
-        ChangeState(new MoveState());
         OnInit();
     }
 
-    private void FixedUpdate()
+    private void Update()
     {
         if (currentState != null)
         {
             currentState.OnExcute(this);
         }
-        target = FindTarget();
+        if(target == null)
+        {
+            target = FindTarget();
+        }
+
+        if (target != null && target.IsDead)
+        {
+            ChangeAnim("Idle");
+        }
         //if (target != null)
         //{
         //    getTarget.SetActive(false);
@@ -51,11 +58,23 @@ public class AllyAndEnemy : Character
         //{
         //    getTarget.SetActive(true);
         //}
+        if (target != null && Vector2.Distance(target.transform.position, transform.position) > attackRange)
+        {
+            target = null;
+        }
+    }
+
+    public override void OnInit()
+    {
+        base.OnInit();
+        ChangeState(new MoveState());
+        speed = 3;
+
     }
 
     private void Despawn()
     {
-        LeanPool.Despawn(this);
+        Destroy(this.gameObject);
     }
     protected override void Dead()
     {
@@ -63,7 +82,9 @@ public class AllyAndEnemy : Character
         Invoke(nameof(Despawn), 1.5f);
         this.GetComponent<Collider2D>().enabled = false;
         ChangeState(null);
-        speed = 0;
+        target = null;
+        rb.velocity = Vector2.zero;
+        targets.Clear();
     }
 
     public void Move()

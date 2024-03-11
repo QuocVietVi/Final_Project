@@ -114,16 +114,16 @@ MonoBehaviour:
   rb: {fileID: 685185674739882722}
   anim: {fileID: 4341808679279909394}
   speed: 3
-  maxHp: 0
+  maxHp: 200
   throwPoint: {fileID: 0}
+  attackRange: 7
+  target: {fileID: 0}
   bulletDamage: 0
   slashDamage: 0
   faction: 1
-  attackRange: 7
   getTarget: {fileID: 3798399041051820396}
-  attackArea: {fileID: 5596816815556698596}
+  attackCollider: {fileID: 0}
   bullet: {fileID: 0}
-  target: {fileID: 0}
   delayTime: 0
   AEType: 0
 --- !u!1 &3798399041051820396
@@ -298,6 +298,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   allyAndEnemy: {fileID: -7942107750158695157}
+  player: {fileID: 0}
 --- !u!1 &5596816815556698596
 GameObject:
   m_ObjectHideFlags: 0
@@ -416,7 +417,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: -0.09882283, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -427,7 +428,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 1.2635269, y: 1}
   m_EdgeRadius: 0
 --- !u!114 &105091529444082940
 MonoBehaviour:
@@ -442,6 +443,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attacker: {fileID: -7942107750158695157}
+  victim: {fileID: 0}
 --- !u!1001 &2507166382650150753
 PrefabInstance:
   m_ObjectHideFlags: 0

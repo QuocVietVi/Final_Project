@@ -6,46 +6,64 @@ using UnityEngine;
 public class Map : MonoBehaviour
 {
     [SerializeField] private List<AllyAndEnemy> enemies = new List<AllyAndEnemy>();
-    private List<AllyAndEnemy> maxEnemies = new List<AllyAndEnemy>();
     [SerializeField] private Transform spawnPoint;
+    private List<AllyAndEnemy> maxEnemies = new List<AllyAndEnemy>();
     private Vector3 spawnPos;
 
     private void Start()
     {
-        //InvokeRepeating(nameof(SpawnEnemy1), 2f, 2f);
+        InvokeRepeating(nameof(SpawnEnemy1), 2f, 2f);
         //InvokeRepeating(nameof(SpawnEnemy2), 4f, 3f);
     }
 
     private void Update()
     {
         spawnPos = new Vector3(spawnPoint.position.x, Random.RandomRange(spawnPoint.position.y, spawnPoint.position.y + 0.7f), 0);
+        RemoveEnemy();
+        
     }
 
-    private void SpawnEnemies()
+    private void RemoveEnemy()
     {
+        if (maxEnemies.Count > 0)
+        {
+            for (int i = 0; i < maxEnemies.Count; i++)
+            {
+                if (maxEnemies[i] == null)
+                {
+                    maxEnemies.RemoveAt(i);
+                    Debug.Log("remove");
+                }
+            }
+        }
         
     }
 
     private void SpawnEnemy1()
     {
-        if (maxEnemies.Count <= 10)
+        //int index = maxEnemies.Count - 1;
+        if (maxEnemies.Count <= 4)
         {
-            AllyAndEnemy enemy = LeanPool.Spawn(enemies[0], spawnPos, spawnPoint.rotation);
+            AllyAndEnemy enemy = Instantiate(enemies[0], spawnPos, spawnPoint.rotation);
+            enemy.OnInit();
             maxEnemies.Add(enemy);
+
         }
         
     }
 
     private void SpawnEnemy2()
     {
-        AllyAndEnemy enemy = LeanPool.Spawn(enemies[1] , spawnPos, spawnPoint.rotation);
+        AllyAndEnemy enemy = Instantiate(enemies[1] , spawnPos, spawnPoint.rotation);
+        enemy.OnInit();
         maxEnemies.Add(enemy);
 
     }
 
     private void SpawnEnemy3()
     {
-        AllyAndEnemy enemy = LeanPool.Spawn(enemies[2] , spawnPos, spawnPoint.rotation);
+        AllyAndEnemy enemy = Instantiate(enemies[2] , spawnPos, spawnPoint.rotation);
+        enemy.OnInit();
         maxEnemies.Add(enemy);
 
     }

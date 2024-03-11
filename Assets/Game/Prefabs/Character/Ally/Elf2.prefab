@@ -114,16 +114,16 @@ MonoBehaviour:
   rb: {fileID: 3646649616759895637}
   anim: {fileID: 4840741563476808522}
   speed: 3
-  maxHp: 0
+  maxHp: 80
   throwPoint: {fileID: 428692588609749978}
+  attackRange: 4
+  target: {fileID: 0}
   bulletDamage: 20
   slashDamage: 0
   faction: 1
-  attackRange: 4
   getTarget: {fileID: 7113556636792410632}
-  attackArea: {fileID: 0}
+  attackCollider: {fileID: 0}
   bullet: {fileID: -2453844844934779787, guid: c15ebbc8fa1f84449807445d7948c18e, type: 3}
-  target: {fileID: 0}
   delayTime: 0.7
   AEType: 1
 --- !u!1 &4038202920841359851
@@ -382,6 +382,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   allyAndEnemy: {fileID: 2057699101191979867}
+  player: {fileID: 0}
 --- !u!1001 &3651047000293905197
 PrefabInstance:
   m_ObjectHideFlags: 0
