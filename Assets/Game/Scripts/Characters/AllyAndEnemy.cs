@@ -26,6 +26,7 @@ public class AllyAndEnemy : Character
 
     
     public float delayTime;
+    public float energyNedded;
     public AllyAndEnemyType AEType;
     
 

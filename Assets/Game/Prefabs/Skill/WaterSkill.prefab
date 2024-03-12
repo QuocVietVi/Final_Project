@@ -84,6 +84,7 @@ MonoBehaviour:
   skillDamage: 2
   col: {fileID: 6216457042989257255}
   despawnTime: 0.5
+  manaNeeded: 20
 --- !u!1 &4123759297737378670
 GameObject:
   m_ObjectHideFlags: 0

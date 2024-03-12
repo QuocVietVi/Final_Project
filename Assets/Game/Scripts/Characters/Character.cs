@@ -96,5 +96,8 @@ public class Character : MonoBehaviour
         return target;
     }
 
-
+    public float GetHpNormalized()
+    {
+        return hp / maxHp;
+    }
 }

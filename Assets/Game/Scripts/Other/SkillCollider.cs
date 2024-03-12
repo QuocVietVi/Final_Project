@@ -7,7 +7,8 @@ public class SkillCollider : MonoBehaviour
 {
     [SerializeField] private float skillDamage;
     [SerializeField] private Collider2D col;
-    [SerializeField] private float despawnTime;
+    public float despawnTime;
+    public int manaNeeded;
 
     private void Start()
     {

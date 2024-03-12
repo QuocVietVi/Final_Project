@@ -383,7 +383,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0.30791706, y: 2.3775637}
@@ -413,4 +413,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   skillDamage: 20
   col: {fileID: 6600054222271035696}
-  despawnTime: 1.2
+  despawnTime: 1
+  manaNeeded: 20
