@@ -165,7 +165,7 @@ public class Player : Character
         if (energy >= allies.energyNedded)
         {
             AllyAndEnemy ally = Instantiate(allies, spawnPos, Quaternion.Euler(Vector3.zero));
-            canCallAlly1 = true;
+            
             energy -= allies.energyNedded;
         }
 
@@ -176,33 +176,38 @@ public class Player : Character
     {
         yield return new WaitForSeconds(allies[0].delayTime);
         SpawnAlly(allies[0]);
-
+        canCallAlly1 = true;
     }
 
     private IEnumerator SpawnAlly2()
     {
         yield return new WaitForSeconds(allies[1].delayTime);
         SpawnAlly(allies[1]);
-
+        canCallAlly2 = true;
     }
 
     private IEnumerator SpawnAlly3()
     {
         yield return new WaitForSeconds(allies[2].delayTime);
         SpawnAlly(allies[2]);
-
+        canCallAlly3 = true;
     }
     //----------------- End Spawn ally ------------------
 
     //----------------- Attack ------------------
     private void Attack(string animName)
     {
-        anim.SetTrigger(animName);
-        rb.velocity = Vector2.zero;
-        isRun = false;
-        SetAttack();
-        Invoke(nameof(ResetAttack), 0.5f);
-        Invoke(nameof(CanRun), 0.7f);
+        if (energy >= 20)
+        {
+            anim.SetTrigger(animName);
+            rb.velocity = Vector2.zero;
+            isRun = false;
+            energy -= 20;
+            SetAttack();
+            Invoke(nameof(ResetAttack), 0.5f);
+            Invoke(nameof(CanRun), 0.7f);
+        }
+
     }
 
     private void Shash()
