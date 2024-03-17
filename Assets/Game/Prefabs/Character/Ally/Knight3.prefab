@@ -187,7 +187,7 @@ GameObject:
   - component: {fileID: 2493115331066028224}
   m_Layer: 8
   m_Name: AttackCollider
-  m_TagString: Untagged
+  m_TagString: Attack Collider
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

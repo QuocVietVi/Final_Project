@@ -7,7 +7,7 @@ public class AttackState : IState
     float timer;
     public void OnEnter(AllyAndEnemy allyAndEnemy)
     {
-        if (allyAndEnemy.target != null)
+        if (allyAndEnemy.target != null || GameManager.Instance.map.tower != null)
         {
             allyAndEnemy.StopMoving();
             allyAndEnemy.Attack();

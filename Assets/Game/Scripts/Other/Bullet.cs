@@ -54,6 +54,15 @@ public class Bullet : MonoBehaviour
             }
 
         }
+        if (collision.CompareTag("Tower"))
+        {
+            if (attacker.faction == Faction.Ally)
+            {
+                Tower tower = collision.GetComponent<Tower>();
+                tower.Hp -= attacker.bulletDamage;
+                Despawn();
+            }
+        }
 
     }
 }

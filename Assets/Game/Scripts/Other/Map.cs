@@ -10,9 +10,11 @@ public class Map : MonoBehaviour
     private List<AllyAndEnemy> maxEnemies = new List<AllyAndEnemy>();
     private Vector3 spawnPos;
 
+    public Tower tower;
+
     private void Start()
     {
-        InvokeRepeating(nameof(SpawnEnemy1), 2f, 2f);
+        InvokeRepeating(nameof(SpawnEnemy1), 2f, 4f);
         //InvokeRepeating(nameof(SpawnEnemy2), 4f, 3f);
     }
 

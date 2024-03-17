@@ -16,6 +16,8 @@ public class Character : MonoBehaviour
     private string currentAnimName;
 
     protected List<Character> targets = new List<Character>();
+    protected Tower tower;
+
     public Character target;
     public float bulletDamage;
     public float slashDamage;

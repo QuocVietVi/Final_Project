@@ -6,7 +6,13 @@ using UnityEngine.UI;
 public class StatsManager : MonoBehaviour
 {
     [SerializeField] private Image barImage;
+    [SerializeField] private Tower tower;
     public Player player;
+
+    private void Start()
+    {
+        tower = GameManager.Instance.map.tower;
+    }
 
     private void Update()
     {
@@ -21,6 +27,10 @@ public class StatsManager : MonoBehaviour
         if (barImage.name == "AmountOfEnergy")
         {
             barImage.fillAmount = player.GetEnergyNormalized();
+        }
+        if (barImage.name == "AmountOfTowerHp")
+        {
+            barImage.fillAmount = tower.GetHpNormalized();
         }
     }
 

@@ -547,7 +547,7 @@ Transform:
   m_GameObject: {fileID: 86809708}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.33, y: -0.63, z: -8.5}
+  m_LocalPosition: {x: -0.33, y: -0.63, z: 17}
   m_LocalScale: {x: 0.83, y: 1.39, z: 0.5}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -732,6 +732,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   barImage: {fileID: 277667775}
+  tower: {fileID: 0}
   player: {fileID: 1487775366}
 --- !u!1 &125424605
 GameObject:
@@ -785,6 +786,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   barImage: {fileID: 1787808041}
+  tower: {fileID: 0}
   player: {fileID: 1487775366}
 --- !u!1 &134076935
 GameObject:
@@ -3188,6 +3190,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   barImage: {fileID: 1349137407}
+  tower: {fileID: 0}
   player: {fileID: 1487775366}
 --- !u!1 &551023734
 GameObject:
@@ -16975,7 +16978,7 @@ GameObject:
   - component: {fileID: 1234893771}
   - component: {fileID: 1234893770}
   m_Layer: 5
-  m_Name: AmountOfEnergy
+  m_Name: AmountOfTowerHp
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -17618,9 +17621,11 @@ GameObject:
   - component: {fileID: 1325847135}
   - component: {fileID: 1325847134}
   - component: {fileID: 1325847136}
+  - component: {fileID: 1325847138}
+  - component: {fileID: 1325847137}
   m_Layer: 0
   m_Name: Tower
-  m_TagString: Untagged
+  m_TagString: Tower
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -17726,7 +17731,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.013821244, y: -0.1071043}
+  m_Offset: {x: -0.06901157, y: -0.1071043}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -17737,8 +17742,48 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 2.670287, y: 4.2965565}
+  m_Size: {x: 2.7806675, y: 4.2965565}
   m_EdgeRadius: 0
+--- !u!114 &1325847137
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1325847133}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 184d8a6b7712c724ba98355ddd95a047, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHp: 1000
+--- !u!50 &1325847138
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1325847133}
+  m_BodyType: 2
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!1 &1334356538
 GameObject:
   m_ObjectHideFlags: 0
@@ -18234,8 +18279,8 @@ CapsuleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -1.0026283, y: -1.0972613}
-  m_Size: {x: 1.5030346, y: 3.1273272}
+  m_Offset: {x: -0.9373548, y: -1.0972613}
+  m_Size: {x: 1.6335816, y: 3.1273272}
   m_Direction: 0
 --- !u!1 &1408680768
 GameObject:
@@ -18340,6 +18385,7 @@ MonoBehaviour:
   - {fileID: 3099303974015687610, guid: 39ed17b3287ab8f44b1f17639ad6af51, type: 3}
   - {fileID: -6136784181918536770, guid: 81bc0fe7a78726c41ae8589051e2b7b3, type: 3}
   spawnPoint: {fileID: 519934877}
+  tower: {fileID: 1325847137}
 --- !u!1 &1444945865
 GameObject:
   m_ObjectHideFlags: 0
@@ -18755,6 +18801,51 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1507245708}
   m_CullTransparentMesh: 1
+--- !u!1 &1515533909
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1515533911}
+  - component: {fileID: 1515533910}
+  m_Layer: 0
+  m_Name: GameManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1515533910
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1515533909}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 71eb1d7041b17e54498b511812fa2122, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  map: {fileID: 1408680771}
+--- !u!4 &1515533911
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1515533909}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 14.342775, y: 3.047175, z: -0.1505315}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1518171419
 GameObject:
   m_ObjectHideFlags: 0
@@ -24737,6 +24828,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5656421454006901413, guid: 7b4c21e60b356e04b8ae689a9b6547cf, type: 3}
+      propertyPath: m_TagString
+      value: Attack Collider
+      objectReference: {fileID: 0}
+    - target: {fileID: 6304268786363994474, guid: 7b4c21e60b356e04b8ae689a9b6547cf, type: 3}
+      propertyPath: m_TagString
+      value: Attack Collider
+      objectReference: {fileID: 0}
     - target: {fileID: 7949441762262729946, guid: 7b4c21e60b356e04b8ae689a9b6547cf, type: 3}
       propertyPath: m_Name
       value: Player
@@ -26690,6 +26789,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   barImage: {fileID: 1234893770}
+  tower: {fileID: 0}
   player: {fileID: 1487775366}
 --- !u!1 &2025377729
 GameObject:
@@ -32232,6 +32332,7 @@ SceneRoots:
   - {fileID: 473055428}
   - {fileID: 485677483}
   - {fileID: 2041746811}
+  - {fileID: 1515533911}
   - {fileID: 543314363}
   - {fileID: 732633825}
   - {fileID: 1518171421}

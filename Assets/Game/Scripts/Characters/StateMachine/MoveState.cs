@@ -11,7 +11,7 @@ public class MoveState : IState
 
     public void OnExcute(AllyAndEnemy allyAndEnemy)
     {
-        if (allyAndEnemy.target != null)
+        if (allyAndEnemy.target != null || GameManager.Instance.map.tower != null)
         {
 
             if (allyAndEnemy.TargetInAttackRange())

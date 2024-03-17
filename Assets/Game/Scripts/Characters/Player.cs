@@ -103,21 +103,22 @@ public class Player : Character
             Attack("Shoot");
         }
 
-        if (Input.GetKey(KeyCode.Alpha1) && canCallAlly1 == true)
+        if (Input.GetKey(KeyCode.Q) && canCallAlly1 == true)
         {
             //Invoke(nameof(SpawnAlly1), allies[0].delayTime);
             StartCoroutine(SpawnAlly1());
             canCallAlly1 = false;
+            Debug.Log("Spawn");
         }
 
-        if (Input.GetKey(KeyCode.Alpha2) && canCallAlly2 == true)
+        if (Input.GetKey(KeyCode.W) && canCallAlly2 == true)
         {
             //Invoke(nameof(SpawnAlly2), allies[1].delayTime);
             StartCoroutine(SpawnAlly2());
             canCallAlly2 = false;
         }
 
-        if (Input.GetKey(KeyCode.Alpha3) && canCallAlly3 == true)
+        if (Input.GetKey(KeyCode.E) && canCallAlly3 == true)
         {
             //Invoke(nameof(SpawnAlly3), allies[2].delayTime);
             StartCoroutine(SpawnAlly3());

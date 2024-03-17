@@ -47,5 +47,6 @@ public class AttackCollider : MonoBehaviour
                 victim.OnHit(0);
             }
         }
+
     }
 }

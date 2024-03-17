@@ -63,6 +63,14 @@ public class AllyAndEnemy : Character
         {
             target = null;
         }
+        //if (GameManager.Instance.map.tower != null)
+        //{
+        //    if (Vector2.Distance(GameManager.Instance.map.tower.transform.position, this.transform.position) < attackRange *3)
+        //    {
+        //        ChangeState(new AttackState());
+        //    }
+        //}
+
     }
 
     public override void OnInit()
@@ -141,6 +149,12 @@ public class AllyAndEnemy : Character
     public bool TargetInAttackRange()
     {
         if (target !=null && Vector2.Distance(target.transform.position , transform.position) < attackRange)
+        {
+            return true;
+        }
+        if (GameManager.Instance.map.tower != null && 
+            Vector2.Distance(GameManager.Instance.map.tower.transform.position, this.transform.position) < attackRange +3.5f &&
+            this.faction == Faction.Ally)
         {
             return true;
         }
