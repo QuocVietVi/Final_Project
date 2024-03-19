@@ -55,7 +55,7 @@ public class Player : Character
         canCallAlly2 = true;
         canCallAlly3 = true;
         OnInit();
-        
+        spawnPoint = LevelManager.Instance.map.allySpawnPoint;
     }
     private void FixedUpdate()
     {

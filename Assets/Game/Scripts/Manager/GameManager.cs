@@ -9,5 +9,16 @@ public enum GameState
 
 public class GameManager : Singleton<GameManager>
 {
-    public Map map;
+    public GameState gameState;
+
+
+    public void ChangeState(GameState state)
+    {
+        gameState = state;
+    }
+
+    public bool IsState(GameState state)
+    {
+        return gameState == state;
+    }
 }

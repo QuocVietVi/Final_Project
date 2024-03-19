@@ -3033,7 +3033,7 @@ GameObject:
   - component: {fileID: 7870118361864657322}
   m_Layer: 0
   m_Name: AttackCollider2
-  m_TagString: Untagged
+  m_TagString: Attack Collider
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3268,7 +3268,7 @@ GameObject:
   - component: {fileID: 7814320479734761877}
   m_Layer: 0
   m_Name: AttackCollider1
-  m_TagString: Untagged
+  m_TagString: Attack Collider
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

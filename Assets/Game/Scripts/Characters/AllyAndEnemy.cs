@@ -152,8 +152,8 @@ public class AllyAndEnemy : Character
         {
             return true;
         }
-        if (GameManager.Instance.map.tower != null && 
-            Vector2.Distance(GameManager.Instance.map.tower.transform.position, this.transform.position) < attackRange +3.5f &&
+        if (LevelManager.Instance.map.tower != null && 
+            Vector2.Distance(LevelManager.Instance.map.tower.transform.position, this.transform.position) < attackRange +3.5f &&
             this.faction == Faction.Ally)
         {
             return true;

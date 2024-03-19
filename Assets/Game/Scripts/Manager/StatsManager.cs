@@ -11,27 +11,36 @@ public class StatsManager : MonoBehaviour
 
     private void Start()
     {
-        tower = GameManager.Instance.map.tower;
     }
 
     private void Update()
     {
-        if (barImage.name == "AmountOfHp")
+        player = CameraFollow.Instance.target;
+        tower = LevelManager.Instance.map.tower;
+        if (player != null)
         {
-            barImage.fillAmount = player.GetHpNormalized();
+            if (barImage.name == "AmountOfHp")
+            {
+                barImage.fillAmount = player.GetHpNormalized();
+            }
+            if (barImage.name == "AmountOfMana")
+            {
+                barImage.fillAmount = player.GetManaNormalized();
+            }
+            if (barImage.name == "AmountOfEnergy")
+            {
+                barImage.fillAmount = player.GetEnergyNormalized();
+            }
         }
-        if (barImage.name == "AmountOfMana")
+       
+        if (tower != null)
         {
-            barImage.fillAmount = player.GetManaNormalized();
+            if (barImage.name == "AmountOfTowerHp")
+            {
+                barImage.fillAmount = tower.GetHpNormalized();
+            }
         }
-        if (barImage.name == "AmountOfEnergy")
-        {
-            barImage.fillAmount = player.GetEnergyNormalized();
-        }
-        if (barImage.name == "AmountOfTowerHp")
-        {
-            barImage.fillAmount = tower.GetHpNormalized();
-        }
+
     }
 
 

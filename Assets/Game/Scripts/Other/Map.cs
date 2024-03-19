@@ -10,6 +10,8 @@ public class Map : MonoBehaviour
     private List<AllyAndEnemy> maxEnemies = new List<AllyAndEnemy>();
     private Vector3 spawnPos;
 
+    public Transform playerSpawnPoint;
+    public Transform allySpawnPoint;
     public Tower tower;
 
     private void Start()
@@ -44,7 +46,7 @@ public class Map : MonoBehaviour
     private void SpawnEnemy1()
     {
         //int index = maxEnemies.Count - 1;
-        if (maxEnemies.Count <= 4)
+        if (maxEnemies.Count <= 4 && GameManager.Instance.IsState(GameState.GamePlay))
         {
             AllyAndEnemy enemy = Instantiate(enemies[0], spawnPos, spawnPoint.rotation);
             enemy.OnInit();
