@@ -49,7 +49,7 @@ public class AllyAndEnemy : Character
 
         if (target != null && target.IsDead)
         {
-            ChangeAnim("Idle");
+            ChangeAnim(ConstantAnim.IDLE);
         }
         //if (target != null)
         //{
@@ -98,7 +98,7 @@ public class AllyAndEnemy : Character
 
     public void Move()
     {
-        ChangeAnim("Run");
+        ChangeAnim(ConstantAnim.RUN);
         //rb.velocity = transform.right * speed;
         if (this.faction == Faction.Enemy)
         {
@@ -114,13 +114,13 @@ public class AllyAndEnemy : Character
 
     public void StopMoving()
     {
-        ChangeAnim("Idle");
+        ChangeAnim(ConstantAnim.IDLE);
         rb.velocity = Vector2.zero;
     }
 
     public void Attack()
     {
-        ChangeAnim("Attack");
+        ChangeAnim(ConstantAnim.ATTACK);
         if (this.AEType == AllyAndEnemyType.CloseRange)
         {
             SetAttack();

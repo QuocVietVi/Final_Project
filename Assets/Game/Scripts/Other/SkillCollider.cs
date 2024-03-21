@@ -17,7 +17,7 @@ public class SkillCollider : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("Enemy"))
+        if (collision.CompareTag(ConstantTag.ENEMY))
         {
             col.enabled = true;
             collision.GetComponent<AllyAndEnemy>().OnHit(skillDamage);

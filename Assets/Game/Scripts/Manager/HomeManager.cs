@@ -11,13 +11,13 @@ public class HomeManager : Singleton<HomeManager>
     private void Start()
     {
         GameManager.Instance.ChangeState(GameState.MainMenu);
-        play.onClick.AddListener(SpawnPlayer);
+        play.onClick.AddListener(SpawnLevelButton);
         tapToStart.onClick.AddListener(CloseStartPanel);
     }
 
-    private void SpawnPlayer()
+    private void SpawnLevelButton()
     {
-        LevelManager.Instance.SpawnPlayer();
+        LevelManager.Instance.levelPanel.SetActive(true);
         homeScene.SetActive(false);
     }
 

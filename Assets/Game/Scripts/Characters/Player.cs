@@ -108,7 +108,6 @@ public class Player : Character
             //Invoke(nameof(SpawnAlly1), allies[0].delayTime);
             StartCoroutine(SpawnAlly1());
             canCallAlly1 = false;
-            Debug.Log("Spawn");
         }
 
         if (Input.GetKey(KeyCode.W) && canCallAlly2 == true)
@@ -142,14 +141,14 @@ public class Player : Character
         horizontal = Input.GetAxisRaw("Horizontal"); // lấy điều khiển từ bàn phím (chiều ngang)
         if (Mathf.Abs(horizontal) > 0.1f && isRun == true) // khi bấm phím
         {
-            ChangeAnim("Run");
+            ChangeAnim(ConstantAnim.RUN);
             rb.velocity = new Vector2(horizontal * speed, rb.velocity.y);
             //horizontal > 0 -> trả về -0.6, nếu horizontal <= 0 -> trả về 0.6
             transform.localScale = new Vector3(horizontal > 0 ? -0.6f : 0.6f, 0.6f, 0.6f);
         }
         else 
         {
-            ChangeAnim("Idle");
+            ChangeAnim(ConstantAnim.IDLE);
             rb.velocity = Vector2.zero;
             transform.localScale = new Vector3(-0.6f, 0.6f, 0.6f);
         }
@@ -213,13 +212,13 @@ public class Player : Character
 
     private void Shash()
     {
-        Attack("Attack");
+        Attack(ConstantAnim.ATTACK);
         attackCollider1.SetActive(true);
     }
 
     private void Poked()
     {
-        Attack("Attack2");
+        Attack(ConstantAnim.ATTACK2);
         attackCollider2.SetActive(true);
     }
 
@@ -248,12 +247,12 @@ public class Player : Character
 
     private void Skill1()
     {
-        UseSkill("Skill1", listSkills[0]);
+        UseSkill(ConstantAnim.SKILL1, listSkills[0]);
     }
 
     private void Skill2()
     {
-        UseSkill("Skill2", listSkills[1]);
+        UseSkill(ConstantAnim.SKILL2, listSkills[1]);
     }
 
     // ------------------ End skill --------------------

@@ -8,7 +8,7 @@ public class GetTarget : MonoBehaviour
     [SerializeField] private Player player;
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.tag == "Enemy" )
+        if (collision.tag == ConstantTag.ENEMY )
         {
             if (allyAndEnemy != null && allyAndEnemy.faction == Faction.Ally && allyAndEnemy.AEType != AllyAndEnemyType.Healing)
             {
@@ -21,7 +21,7 @@ public class GetTarget : MonoBehaviour
             }
         }
 
-        if (collision.tag == "Ally")
+        if (collision.tag == ConstantTag.ALLY)
         {
             if (allyAndEnemy != null) 
             {

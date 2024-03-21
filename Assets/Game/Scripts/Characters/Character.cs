@@ -53,7 +53,7 @@ public class Character : MonoBehaviour
 
     protected virtual void Dead()
     {
-        ChangeAnim("Die");
+        ChangeAnim(ConstantAnim.DIE);
     }
 
     public void OnHit(float damage)

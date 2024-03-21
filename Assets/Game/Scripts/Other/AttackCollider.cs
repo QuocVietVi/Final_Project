@@ -14,7 +14,7 @@ public class AttackCollider : MonoBehaviour
         //{
         //    victim = attacker.target;
         //}
-        if (collision.CompareTag("Enemy") && attacker.faction == Faction.Ally && victim == attacker.target)
+        if (collision.CompareTag(ConstantTag.ENEMY) && attacker.faction == Faction.Ally && victim == attacker.target)
         {
 
             if (attacker.target != null)
@@ -33,7 +33,7 @@ public class AttackCollider : MonoBehaviour
             //}
 
         }
-        if (collision.CompareTag("Ally") && attacker.faction == Faction.Enemy && victim == attacker.target)
+        if (collision.CompareTag(ConstantTag.ALLY) && attacker.faction == Faction.Enemy && victim == attacker.target)
         {
             //collision.GetComponent<Character>().OnHit(attacker.slashDamage);
             //Debug.Log("Enemy Attack");

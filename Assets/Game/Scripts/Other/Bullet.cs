@@ -35,12 +35,12 @@ public class Bullet : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("Enemy") && attacker.faction == Faction.Ally && attacker.AEType != AllyAndEnemyType.Healing)
+        if (collision.CompareTag(ConstantTag.ENEMY) && attacker.faction == Faction.Ally && attacker.AEType != AllyAndEnemyType.Healing)
         {
             collision.GetComponent<Character>().OnHit(attacker.bulletDamage);
             Despawn();
         }
-        if (collision.CompareTag("Ally"))
+        if (collision.CompareTag(ConstantTag.ALLY))
         {
             if (attacker.faction == Faction.Enemy)
             {
@@ -54,7 +54,7 @@ public class Bullet : MonoBehaviour
             }
 
         }
-        if (collision.CompareTag("Tower"))
+        if (collision.CompareTag(ConstantTag.TOWER))
         {
             if (attacker.faction == Faction.Ally)
             {

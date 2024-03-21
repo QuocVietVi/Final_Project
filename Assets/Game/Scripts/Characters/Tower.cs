@@ -22,7 +22,7 @@ public class Tower : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("Attack Collider"))
+        if (collision.CompareTag(ConstantTag.ATTACKCOLLIDER))
         {
             AttackCollider attackCollider = collision.GetComponent<AttackCollider>();
             hp -= attackCollider.attacker.slashDamage;
