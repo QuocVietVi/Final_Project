@@ -8,6 +8,8 @@ public class HomeManager : Singleton<HomeManager>
     [SerializeField] private Button play;
     [SerializeField] private Button tapToStart;
     [SerializeField] private GameObject startScene, homeScene;
+
+    public GameObject homePanel;
     private void Start()
     {
         GameManager.Instance.ChangeState(GameState.MainMenu);
@@ -18,7 +20,7 @@ public class HomeManager : Singleton<HomeManager>
     private void SpawnLevelButton()
     {
         LevelManager.Instance.levelPanel.SetActive(true);
-        homeScene.SetActive(false);
+        homePanel.SetActive(false);
     }
 
     private void CloseStartPanel()
@@ -26,5 +28,6 @@ public class HomeManager : Singleton<HomeManager>
         startScene.SetActive(false);
         homeScene.SetActive(true);
     }
+
 
 }

@@ -36,7 +36,7 @@ public class LevelManager : Singleton<LevelManager>
             {
                 LevelButtonAction button = LeanPool.Spawn(levelButton, buttonHolder);
                 button.levelText.text = levelSO.levels[(int)chapter].level[i].ToString();
-                button.SetOnClick((int)levelSO.levels[(int)chapter].chapter, levelSO.levels[(int)chapter].level[i]);
+                button.SetOnClick((int)levelSO.levels[(int)chapter].chapter +1, levelSO.levels[(int)chapter].level[i]);
                 button.levelPanel = this.levelPanel;
                 buttons.Add(button);
             }
@@ -118,5 +118,10 @@ public class LevelManager : Singleton<LevelManager>
     {
         prev.gameObject.SetActive((int)currentChapter > 0);
         next.gameObject.SetActive((int)currentChapter < panelChapter.Count - 1);
+    }
+
+    public void FindMap()
+    {
+        map = FindObjectOfType<Map>();
     }
 }

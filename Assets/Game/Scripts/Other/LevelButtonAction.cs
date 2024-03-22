@@ -22,6 +22,7 @@ public class LevelButtonAction : MonoBehaviour
     {
         map = Resources.Load<Map>(Constant.MAP_NAME + chapter + "-" + level);
         Instantiate(map);
+        LevelManager.Instance.FindMap();
         levelPanel.SetActive(false);
         Invoke(nameof(SpawnPlayer), 0.5f);
     }

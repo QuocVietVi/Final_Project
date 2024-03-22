@@ -16,7 +16,10 @@ public class StatsManager : MonoBehaviour
     private void Update()
     {
         player = CameraFollow.Instance.target;
-        tower = LevelManager.Instance.map.tower;
+        //if (LevelManager.Instance.map!= null)
+        //{
+        //    tower = LevelManager.Instance.map.tower;
+        //}
         if (player != null)
         {
             if (barImage.name == "AmountOfHp")
@@ -33,10 +36,11 @@ public class StatsManager : MonoBehaviour
             }
         }
        
-        if (tower != null)
+        if (LevelManager.Instance.map != null)
         {
             if (barImage.name == "AmountOfTowerHp")
             {
+                tower = LevelManager.Instance.map.tower;
                 barImage.fillAmount = tower.GetHpNormalized();
             }
         }
