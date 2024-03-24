@@ -15,6 +15,7 @@ public class LevelButtonAction : MonoBehaviour
         levelButton.onClick.AddListener(() =>
         {
             SpawnMap(chapter,level);
+            LevelManager.Instance.currentLevel = level;
         });
     }
 

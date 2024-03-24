@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using static Cinemachine.DocumentationSortingAttribute;
 
 public class LevelManager : Singleton<LevelManager>
 {
@@ -17,6 +18,7 @@ public class LevelManager : Singleton<LevelManager>
     public GameObject levelPanel;
     public Map map;
     public Player player;
+    public int currentLevel;
 
     private void Start()
     {
@@ -58,16 +60,14 @@ public class LevelManager : Singleton<LevelManager>
         Active(panelChapter[(int)currentChapter]);
         SetArrowActive();
     }
-
-    public void Despawn()
-    {
-        for (int i = 0; i < buttons.Count; i++)
-        {
-            LeanPool.Despawn(buttons[i].gameObject);
-        }
-        buttons.Clear();
-    }
-
+    //public void Despawn()
+    //{
+    //    for (int i = 0; i < buttons.Count; i++)
+    //    {
+    //        LeanPool.Despawn(buttons[i].gameObject);
+    //    }
+    //    buttons.Clear();
+    //}
     public void Active(GameObject chapter)
     {
         chapter.SetActive(true);
@@ -123,5 +123,15 @@ public class LevelManager : Singleton<LevelManager>
     public void FindMap()
     {
         map = FindObjectOfType<Map>();
+    }
+
+    private void Replay(int chapter, int level)
+    {
+        map = Instantiate(Resources.Load<Map>(Constant.MAP_NAME + chapter + "-" + level));
+    }
+
+    public void ReplayLevel()
+    {
+        Replay((int)currentChapter + 1, currentLevel);
     }
 }

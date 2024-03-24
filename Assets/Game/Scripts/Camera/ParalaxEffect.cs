@@ -31,7 +31,7 @@ public class ParalaxEffect : MonoBehaviour
             backgrounds[i] = transform.GetChild(i).gameObject;
             material[i] = backgrounds[i].GetComponent<Renderer>().material;
         }
-        Invoke(nameof(Delay), 3f);
+        Invoke(nameof(Delay), 2f);
     }
 
     private void LateUpdate()

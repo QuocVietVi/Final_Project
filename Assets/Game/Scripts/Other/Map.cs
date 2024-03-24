@@ -72,14 +72,14 @@ public class Map : MonoBehaviour
 
     }
 
-    public void DespawnAllEnemy()
-    {
-        for (int i = 0; i < maxEnemies.Count; i++)
-        {
-            Destroy(maxEnemies[i].gameObject);
-            maxEnemies.Clear();
-        }
-    }
+    //public void DespawnAllEnemy()
+    //{
+    //    for (int i = 0; i < maxEnemies.Count; i++)
+    //    {
+    //        Destroy(maxEnemies[i].gameObject);
+    //        maxEnemies.Clear();
+    //    }
+    //}
 
     public void Despawn()
     {

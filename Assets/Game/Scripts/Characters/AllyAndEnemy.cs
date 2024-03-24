@@ -63,13 +63,12 @@ public class AllyAndEnemy : Character
         {
             target = null;
         }
-        //if (GameManager.Instance.map.tower != null)
-        //{
-        //    if (Vector2.Distance(GameManager.Instance.map.tower.transform.position, this.transform.position) < attackRange *3)
-        //    {
-        //        ChangeState(new AttackState());
-        //    }
-        //}
+        if (GameManager.Instance.IsState(GameState.Restart) || GameManager.Instance.IsState(GameState.MainMenu) ||
+            GameManager.Instance.IsState(GameState.GameOver))
+        {
+            Invoke(nameof(Despawn), 0.5f);
+        }
+
 
     }
 

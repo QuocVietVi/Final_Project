@@ -125,6 +125,7 @@ public class Player : Character
         }
         // ----------------------- End input from keyboard -----------------------
 
+        
 
     }
 
@@ -133,6 +134,12 @@ public class Player : Character
         base.OnInit();
         Mana = maxMana;
         Energy = maxEnergy;
+    }
+
+    protected override void Dead()
+    {
+        base.Dead();
+        GameManager.Instance.ChangeState(GameState.GameOver);
     }
 
     //--------------- Move -------------------
@@ -289,6 +296,28 @@ public class Player : Character
     public float GetEnergyNormalized()
     {
         return energy / maxEnergy;
+    }
+
+    public void StarLevel(GameObject star1, GameObject star2, GameObject star3)
+    {
+        if (Hp >= maxHp * 80 / 100)
+        {
+            star1.SetActive(true);
+            star2.SetActive(true);
+            star3.SetActive(true);
+        }
+        if (Hp < maxHp * 80 / 100 && Hp >= maxHp * 30/100)
+        {
+            star1.SetActive(true);
+            star2.SetActive(true);
+            star3.SetActive(false);
+        }
+        if (Hp < maxHp * 30 / 100)
+        {
+            star1.SetActive(true);
+            star2.SetActive(false);
+            star3.SetActive(false);
+        }
     }
 
     //private AllyAndEnemy FindEnemy(LayerMask enemy)
