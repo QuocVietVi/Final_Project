@@ -132,6 +132,7 @@ public class Player : Character
     public override void OnInit()
     {
         base.OnInit();
+        ChangeAnim(ConstantAnim.IDLE);
         Mana = maxMana;
         Energy = maxEnergy;
     }
@@ -139,7 +140,7 @@ public class Player : Character
     protected override void Dead()
     {
         base.Dead();
-        GameManager.Instance.ChangeState(GameState.GameOver);
+        GameManager.Instance.GameOver();
     }
 
     //--------------- Move -------------------
@@ -318,6 +319,11 @@ public class Player : Character
             star2.SetActive(false);
             star3.SetActive(false);
         }
+    }
+
+    public void Revive()
+    {
+        Hp = maxHp * 80 / 100; 
     }
 
     //private AllyAndEnemy FindEnemy(LayerMask enemy)

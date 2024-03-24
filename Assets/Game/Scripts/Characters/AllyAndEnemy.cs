@@ -63,8 +63,7 @@ public class AllyAndEnemy : Character
         {
             target = null;
         }
-        if (GameManager.Instance.IsState(GameState.Restart) || GameManager.Instance.IsState(GameState.MainMenu) ||
-            GameManager.Instance.IsState(GameState.GameOver))
+        if (GameManager.Instance.IsState(GameState.Restart) || GameManager.Instance.IsState(GameState.MainMenu) )
         {
             Invoke(nameof(Despawn), 0.5f);
         }

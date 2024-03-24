@@ -13,8 +13,11 @@ public class GameManager : Singleton<GameManager>
     [SerializeField] private Button resume, menu, replay;
     [SerializeField] private GameObject menuPanel;
     [SerializeField] private GameObject star1, star2, star3;
-    [SerializeField] private GameObject victoryPanel;
-
+    [SerializeField] private GameObject victoryPanel, gameOverPanel;
+    //victory
+    [SerializeField] private Button claim;
+    //game over
+    [SerializeField] private Button continueGame, backToMenu;
     public GameState gameState;
     public Transform camera;
     public GameObject pausePanel;
@@ -27,6 +30,9 @@ public class GameManager : Singleton<GameManager>
         resume.onClick.AddListener(Resume);
         menu.onClick.AddListener(BackToMenu);
         replay.onClick.AddListener(Replay);
+        claim.onClick.AddListener(Claim);
+        continueGame.onClick.AddListener(Continue);
+        backToMenu.onClick.AddListener(BackToMenu);
     }
 
     private void Update()
@@ -79,6 +85,12 @@ public class GameManager : Singleton<GameManager>
         ChangeState(GameState.MainMenu);
     }
 
+    public void Claim()
+    {
+        victoryPanel.SetActive(false);
+        BackToMenu();
+    }
+
     public void Replay()
     {
         Time.timeScale = 1f;
@@ -105,5 +117,21 @@ public class GameManager : Singleton<GameManager>
     {
         victoryPanel.SetActive(true);
         player.StarLevel(star1, star2, star3);
+    }
+
+    public void GameOver()
+    {
+        ChangeState(GameState.GameOver);
+        gameOverPanel.SetActive(true);
+        Time.timeScale = 0f;
+    }
+
+    public void Continue()
+    {
+        ChangeState(GameState.GamePlay);
+        Time.timeScale = 1f;
+        gameOverPanel.SetActive(false);
+        player.OnInit();
+        player.Revive();
     }
 }
