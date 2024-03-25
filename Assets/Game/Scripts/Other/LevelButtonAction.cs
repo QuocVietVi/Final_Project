@@ -16,6 +16,7 @@ public class LevelButtonAction : MonoBehaviour
         {
             SpawnMap(chapter,level);
             LevelManager.Instance.currentLevel = level;
+            SettingManager.Instance.ButtonSoundClick();
         });
     }
 
@@ -32,4 +33,6 @@ public class LevelButtonAction : MonoBehaviour
     {
         LevelManager.Instance.SpawnPlayer();
     }
+
+
 }

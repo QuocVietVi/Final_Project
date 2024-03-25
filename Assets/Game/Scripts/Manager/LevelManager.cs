@@ -12,7 +12,9 @@ public class LevelManager : Singleton<LevelManager>
     [SerializeField] private Transform buttonHolder1, buttonHolder2, buttonHolder3;
     [SerializeField] private Chapter currentChapter;
     [SerializeField] private Button prev, next;
+    [SerializeField] private Button back;
     [SerializeField] private List<GameObject> panelChapter;
+    [SerializeField] private GameObject homePanel;
 
     private List<LevelButtonAction> buttons = new List<LevelButtonAction>();
     public GameObject levelPanel;
@@ -23,8 +25,15 @@ public class LevelManager : Singleton<LevelManager>
     private void Start()
     {
         currentChapter = Chapter.Chapter1;
+        // Button onclick
+
         next.onClick.AddListener(Next);
         prev.onClick.AddListener(Prev);
+        back.onClick.AddListener(BackToMenu);
+
+        // End button onclick
+
+        // Spawn button
         SpawnButton(Chapter.Chapter1, buttonHolder1);
         SpawnButton(Chapter.Chapter2, buttonHolder2);
         SpawnButton(Chapter.Chapter3, buttonHolder3);
@@ -51,6 +60,7 @@ public class LevelManager : Singleton<LevelManager>
         currentChapter =(Chapter)(int)currentChapter + 1;
         Active(panelChapter[(int)currentChapter]);
         SetArrowActive();
+        ButtonSoundClick();
     }
 
     private void Prev()
@@ -59,6 +69,7 @@ public class LevelManager : Singleton<LevelManager>
         currentChapter = (Chapter)(int)currentChapter - 1;
         Active(panelChapter[(int)currentChapter]);
         SetArrowActive();
+        ButtonSoundClick();
     }
     //public void Despawn()
     //{
@@ -133,5 +144,17 @@ public class LevelManager : Singleton<LevelManager>
     public void ReplayLevel()
     {
         Replay((int)currentChapter + 1, currentLevel);
+    }
+
+    private void BackToMenu()
+    {
+        levelPanel.SetActive(false);
+        homePanel.SetActive(true);
+        ButtonSoundClick();
+    }
+
+    private void ButtonSoundClick()
+    {
+        SettingManager.Instance.ButtonSoundClick();
     }
 }

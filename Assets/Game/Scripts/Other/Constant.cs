@@ -31,3 +31,16 @@ public static class ConstantTag
 
 
 }
+
+public static class ConstantSound
+{
+    public static string THEME = "Theme";
+    public static string BUTTON_CLICK = "Button Click";
+    public static string ATTACK1 = "Attack1";
+    public static string ATTACK2 = "Attack2";
+    public static string FLAME_SKILL = "Flame Skill";
+    public static string THUNDER_SKILL = "Thunder Skill";
+    public static string WATER_SKILL = "Water Skill";
+    public static string DIE = "Die";
+    public static string GAMEOVER = "Game Over";
+}

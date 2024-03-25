@@ -32,7 +32,11 @@ public class GameManager : Singleton<GameManager>
         replay.onClick.AddListener(Replay);
         claim.onClick.AddListener(Claim);
         continueGame.onClick.AddListener(Continue);
-        backToMenu.onClick.AddListener(BackToMenu);
+        backToMenu.onClick.AddListener(() =>
+        {
+            BackToMenu();
+            gameOverPanel.SetActive(false);
+        });
     }
 
     private void Update()
@@ -73,6 +77,7 @@ public class GameManager : Singleton<GameManager>
         pausePanel.SetActive(false);
         Time.timeScale = 1f;
         isPaused = false;
+        ButtonSoundClick();
     }
 
     public void BackToMenu()
@@ -83,12 +88,14 @@ public class GameManager : Singleton<GameManager>
         LevelManager.Instance.map.Despawn();
         menuPanel.SetActive(true);
         ChangeState(GameState.MainMenu);
+        ButtonSoundClick();
     }
 
     public void Claim()
     {
         victoryPanel.SetActive(false);
         BackToMenu();
+        ButtonSoundClick();
     }
 
     public void Replay()
@@ -100,6 +107,7 @@ public class GameManager : Singleton<GameManager>
         LevelManager.Instance.map.Despawn();
         Invoke(nameof(SpawnMap), 0.5f);
         Invoke(nameof(SpawnPlayer),1f);
+        ButtonSoundClick();
     }
 
     private void SpawnPlayer()
@@ -133,5 +141,11 @@ public class GameManager : Singleton<GameManager>
         gameOverPanel.SetActive(false);
         player.OnInit();
         player.Revive();
+        ButtonSoundClick();
+    }
+
+    private void ButtonSoundClick()
+    {
+        SettingManager.Instance.ButtonSoundClick();
     }
 }
