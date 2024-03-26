@@ -10,6 +10,7 @@ public class SettingManager : Singleton<SettingManager>
     [SerializeField] private TMP_Dropdown qualityDropdown;
     [SerializeField] private Button back;
     [SerializeField] private GameObject settingPanel;
+    [SerializeField] private Slider musicSlider, sfxSlider;
 
     public Sound[] musicSounds, sfxSounds;
     public AudioSource musicSource, sfxSource;
@@ -18,6 +19,9 @@ public class SettingManager : Singleton<SettingManager>
     {
         qualityDropdown.onValueChanged.AddListener(SetQuality);
         back.onClick.AddListener(Back);
+        musicSlider.onValueChanged.AddListener(MusicVolume);
+        sfxSlider.onValueChanged.AddListener(SFXVolume);
+
     }
 
     public void SetQuality(int quality)
@@ -63,5 +67,15 @@ public class SettingManager : Singleton<SettingManager>
     {
         settingPanel.SetActive(false);
         ButtonSoundClick();
+    }
+
+    public void MusicVolume(float volume)
+    {
+        musicSource.volume = volume;
+    }
+
+    public void SFXVolume(float volume)
+    {
+        sfxSource.volume = volume;
     }
 }

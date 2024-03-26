@@ -10,10 +10,10 @@ public enum GameState
 
 public class GameManager : Singleton<GameManager>
 {
-    [SerializeField] private Button resume, menu, replay;
+    [SerializeField] private Button resume, menu, replay, setting;
     [SerializeField] private GameObject menuPanel;
     [SerializeField] private GameObject star1, star2, star3;
-    [SerializeField] private GameObject victoryPanel, gameOverPanel;
+    [SerializeField] private GameObject victoryPanel, gameOverPanel, settingPanel;
     //victory
     [SerializeField] private Button claim;
     //game over
@@ -32,6 +32,7 @@ public class GameManager : Singleton<GameManager>
         replay.onClick.AddListener(Replay);
         claim.onClick.AddListener(Claim);
         continueGame.onClick.AddListener(Continue);
+        setting.onClick.AddListener(Setting);
         backToMenu.onClick.AddListener(() =>
         {
             BackToMenu();
@@ -142,6 +143,11 @@ public class GameManager : Singleton<GameManager>
         player.OnInit();
         player.Revive();
         ButtonSoundClick();
+    }
+
+    private void Setting()
+    {
+        settingPanel.SetActive(true); 
     }
 
     private void ButtonSoundClick()
