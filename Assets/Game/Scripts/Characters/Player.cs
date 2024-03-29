@@ -212,7 +212,7 @@ public class Player : Character
             isRun = false;
             energy -= 20;
             SetAttack();
-            Invoke(nameof(ResetAttack), 0.5f);
+
             Invoke(nameof(CanRun), 0.7f);
         }
 
@@ -222,12 +222,14 @@ public class Player : Character
     {
         Attack(ConstantAnim.ATTACK);
         attackCollider1.SetActive(true);
+        Invoke(nameof(ResetAttack), 0.5f);
     }
 
     private void Poked()
     {
         Attack(ConstantAnim.ATTACK2);
         attackCollider2.SetActive(true);
+        Invoke(nameof(ResetAttack), 0.5f);
     }
 
     //------------------ End Attack ---------------------

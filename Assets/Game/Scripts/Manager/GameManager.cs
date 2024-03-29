@@ -18,12 +18,14 @@ public class GameManager : Singleton<GameManager>
     [SerializeField] private Button claim;
     //game over
     [SerializeField] private Button continueGame, backToMenu;
+
+    private bool isPaused;
+    private Player player;
+
     public GameState gameState;
     public Transform camera;
     public GameObject pausePanel;
 
-    private bool isPaused;
-    private Player player;
 
     private void Start()
     {
