@@ -27,7 +27,7 @@ MonoBehaviour:
     price: 450
   - shieldType: 3
     bonusHp: 120
-    image: {fileID: 0}
+    image: {fileID: 21300000, guid: e923de3c163fafe428ade944b0d1d8ca, type: 3}
     price: 550
   - shieldType: 4
     bonusHp: 150

@@ -11,6 +11,7 @@ public class HomeManager : Singleton<HomeManager>
     [SerializeField] private GameObject startScene, homeScene;
     [SerializeField] private GameObject settingPanel;
 
+
     public GameObject homePanel;
     private void Start()
     {
@@ -44,6 +45,13 @@ public class HomeManager : Singleton<HomeManager>
 
     private void ButtonSoundClick()
     {
+        SettingManager.Instance.ButtonSoundClick();
+
+    }
+
+    public void ActivePanel(GameObject panel)
+    {
+        panel.SetActive(true);
         SettingManager.Instance.ButtonSoundClick();
 
     }

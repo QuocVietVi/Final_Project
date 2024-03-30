@@ -10,6 +10,7 @@ public class WeaponData
     public float damage;
     public GameObject weaponPrefab;
     public int price;
+    public Sprite image;
 }
 
 public enum WeaponType

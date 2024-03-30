@@ -17,39 +17,49 @@ MonoBehaviour:
     damage: 0
     weaponPrefab: {fileID: 2664045442044136184, guid: 0d44c2da09c0b1e44b7b7b67683770da, type: 3}
     price: 0
+    image: {fileID: 21300000, guid: bfd844388a7b3f64baa5d75954d5e27e, type: 3}
   - weaponType: 1
     damage: 5
     weaponPrefab: {fileID: 7210949123015315698, guid: a2ad3d4eba2b0f6459d2eb7567a0cee3, type: 3}
     price: 200
+    image: {fileID: 21300000, guid: e23cb60620773ba4bb0519489eb7d18c, type: 3}
   - weaponType: 2
     damage: 10
     weaponPrefab: {fileID: 3232641596828556017, guid: 45e486246e8436c4aaa759beddcfcff9, type: 3}
     price: 250
+    image: {fileID: 21300000, guid: b508b57390c79ef47a7e885536fab04f, type: 3}
   - weaponType: 3
     damage: 15
     weaponPrefab: {fileID: 2265343368614575903, guid: f8be56a5b7a0d8946b6b463d07695029, type: 3}
     price: 300
+    image: {fileID: 21300000, guid: e34bbf6952173ed4bbe4ff40128f4db5, type: 3}
   - weaponType: 4
     damage: 25
     weaponPrefab: {fileID: 7436389739342492277, guid: f66b39b4b9e2db94d9f6b6c9cd1c1fda, type: 3}
     price: 400
+    image: {fileID: 21300000, guid: 7e0d2cbf85ac14a4b8b54fa0a7dc1aef, type: 3}
   - weaponType: 5
     damage: 35
     weaponPrefab: {fileID: 1687875920540238192, guid: bef3e97eab336944ab49e7ca55ffa78d, type: 3}
     price: 500
+    image: {fileID: 21300000, guid: 2a2fdd25ef1507544a6f14a78daff45d, type: 3}
   - weaponType: 6
     damage: 40
     weaponPrefab: {fileID: 6097705546379441768, guid: 80eae14e16df56c4cbc164f1f6cff847, type: 3}
     price: 550
+    image: {fileID: 21300000, guid: 331cc208e4a918241945dd4e9dcf5d0a, type: 3}
   - weaponType: 7
     damage: 50
     weaponPrefab: {fileID: 2318925727534784485, guid: 552001c962af4504cb6c0145dd2c9b3c, type: 3}
     price: 650
+    image: {fileID: 21300000, guid: 10db49aac0ae7874ab2c00abd575f21a, type: 3}
   - weaponType: 8
     damage: 65
     weaponPrefab: {fileID: 5411430655358321161, guid: f1428a43ddbf1744fa8b9750191e3eba, type: 3}
     price: 900
+    image: {fileID: 21300000, guid: cbbaf5ea8d45fe5498c622e99ea0fa3f, type: 3}
   - weaponType: 9
     damage: 80
     weaponPrefab: {fileID: 4112298919801822612, guid: 3f06917da9a523f4f880e2ab8aa21449, type: 3}
     price: 1400
+    image: {fileID: 21300000, guid: 57846e9caf9c2044dabfacdefe2fa411, type: 3}
