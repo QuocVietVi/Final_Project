@@ -1,0 +1,83 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b594c9c0db4ef1b4e98a458eab6d86bc, type: 3}
+  m_Name: Ally SO
+  m_EditorClassIdentifier: 
+  allies:
+  - allyType: 0
+    allyPrefab: {fileID: 0}
+    image: {fileID: 0}
+    price: 0
+  - allyType: 1
+    allyPrefab: {fileID: -7827221196242121421, guid: 405bf81549b7def4baee98b221327d4e, type: 3}
+    image: {fileID: 21300000, guid: 31b5af70fb3f73846b62331f55239a5a, type: 3}
+    price: 100
+  - allyType: 2
+    allyPrefab: {fileID: 2057699101191979867, guid: c01d26299f965134f98f54164742ee6f, type: 3}
+    image: {fileID: 21300000, guid: c3be5e80fc2f8ca48a21e642a5f69841, type: 3}
+    price: 200
+  - allyType: 3
+    allyPrefab: {fileID: -2846127886117718562, guid: dd3ca9140f47e5446bb1c83b64fa7eb6, type: 3}
+    image: {fileID: 21300000, guid: 529abf06f5e69814d871b2366eb4695e, type: 3}
+    price: 300
+  - allyType: 4
+    allyPrefab: {fileID: 8440651528636451943, guid: 3777d3cd428d467408fac23044019fc2, type: 3}
+    image: {fileID: 21300000, guid: 9b43be9db56f6e84ebcfbde787019c84, type: 3}
+    price: 400
+  - allyType: 5
+    allyPrefab: {fileID: -7942107750158695157, guid: caf2e60ebad877940aab84474b382ceb, type: 3}
+    image: {fileID: 21300000, guid: bbe750be64c3e0444b83409659161145, type: 3}
+    price: 600
+  - allyType: 6
+    allyPrefab: {fileID: 4145919540557272722, guid: 983dbda13442fa14da2fa1494ad7329a, type: 3}
+    image: {fileID: 21300000, guid: 89ca121f8603fdb449b3231fcd37b22e, type: 3}
+    price: 800
+  - allyType: 7
+    allyPrefab: {fileID: 2161179833904150411, guid: 8120be97a2fff1344b4a40d52fac7aa6, type: 3}
+    image: {fileID: 21300000, guid: bafa444ff5386dc408ca9d74a96a748a, type: 3}
+    price: 1000
+  - allyType: 8
+    allyPrefab: {fileID: 1993822851569250863, guid: d32388f719e120e4797265b3d134ff94, type: 3}
+    image: {fileID: 21300000, guid: af96b0e8dc6ba2043b60a7127d478b77, type: 3}
+    price: 1200
+  - allyType: 9
+    allyPrefab: {fileID: -8604754481235384309, guid: 9c47144a11a297445bd580db6f3ee2fe, type: 3}
+    image: {fileID: 21300000, guid: b21f901c4557f5c45be54aaf93518364, type: 3}
+    price: 1400
+  - allyType: 10
+    allyPrefab: {fileID: 3923011617041041625, guid: 09fad056466dd5c468d9165f257c8146, type: 3}
+    image: {fileID: 21300000, guid: 36fdd884f43e4664b813f65b574b0ee7, type: 3}
+    price: 1500
+  - allyType: 11
+    allyPrefab: {fileID: 9154973499609365936, guid: ccb573a3ebb569f4d9e929724b2974d5, type: 3}
+    image: {fileID: 21300000, guid: b0148f4575f42554cbfb47e8b9bb63fb, type: 3}
+    price: 1800
+  - allyType: 12
+    allyPrefab: {fileID: 3535635136276916856, guid: d92c69f442589904bb114cf2b52c27d6, type: 3}
+    image: {fileID: 21300000, guid: 08f2c069bf3ded443a7cb36e02ec83ca, type: 3}
+    price: 2100
+  - allyType: 13
+    allyPrefab: {fileID: 5380535992059488317, guid: 5d1cbe920d7c5b64092288884a88ee94, type: 3}
+    image: {fileID: 21300000, guid: 401544715a9801845afd8bef32cbdfa5, type: 3}
+    price: 3000
+  - allyType: 14
+    allyPrefab: {fileID: 8705464390269371272, guid: 885e14098ee0ced40b1e3489de15161e, type: 3}
+    image: {fileID: 21300000, guid: 4cf4e2bf514de9f4781096c7b36893ad, type: 3}
+    price: 2300
+  - allyType: 15
+    allyPrefab: {fileID: 7748267944561072048, guid: f989ca5fd5b99f248b3e96d8643be5b0, type: 3}
+    image: {fileID: 21300000, guid: f28f80a9483c9f64388e9f2e63284030, type: 3}
+    price: 2500
+  - allyType: 16
+    allyPrefab: {fileID: 9140430224503408643, guid: 4e8a7e6af77561645a07239187e7bb5a, type: 3}
+    image: {fileID: 21300000, guid: d06d0ccfd7f5f95449796be6ba2490c0, type: 3}
+    price: 3500

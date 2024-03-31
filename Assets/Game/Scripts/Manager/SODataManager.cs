@@ -7,6 +7,7 @@ public class SODataManager : Singleton<SODataManager>
     public WeaponSO weaponSO;
     public ShieldSO shieldSO;
     public AllySO allySO;
+    public SkillSO skillSO;
     
     public WeaponData GetWeaponData(WeaponType weaponType)
     {

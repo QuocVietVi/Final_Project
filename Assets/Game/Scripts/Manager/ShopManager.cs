@@ -5,13 +5,25 @@ using UnityEngine.UI;
 
 public class ShopManager : MonoBehaviour
 {
+    //Shop weapon and shield
     [SerializeField] private Button weaponBtn, shieldBtn;
     [SerializeField] private ShopItemButtonAction shopItem;
     [SerializeField] private GameObject weaponBtnHolder, shieldBtnHolder;
     [SerializeField] private GameObject weaponChoose, shieldChoose, weaponPanel, shieldPanel;
 
+    //Shop Ally
+    [SerializeField] private ShopItemButtonAction allyBtn;
+    [SerializeField] private GameObject allyBtnHolder;
+
+    //Shop skill
+    [SerializeField] private ShopItemButtonAction skillBtn;
+    [SerializeField] private GameObject skillBtnHolder;
+    
+
     private List<WeaponData> weapons;
     private List<ShieldData> shields;
+    private List<AllyData> allies;
+    private List<SkillData> skills;
 
     public WeaponType currentWeapon;
     public ShieldType currentShield;
@@ -21,8 +33,13 @@ public class ShopManager : MonoBehaviour
     {
         weapons = SODataManager.Instance.weaponSO.weapons;
         shields = SODataManager.Instance.shieldSO.shields;
+        allies = SODataManager.Instance.allySO.allies;
+        skills = SODataManager.Instance.skillSO.skills;
+
         SpawnWeaponItem();
         SpawnShieldItem();
+        SpawnAllyButton();
+        SpawnSkillButton();
 
         weaponBtn.onClick.AddListener(ActiveWeapon);
         shieldBtn.onClick.AddListener(ActiveShield);
@@ -52,6 +69,29 @@ public class ShopManager : MonoBehaviour
         }
 
     }
+
+    private void SpawnAllyButton()
+    {
+        for (int i = 1; i < allies.Count; i++)
+        {
+            ShopItemButtonAction item = Instantiate(allyBtn, allyBtnHolder.transform);
+            item.image.sprite = allies[i].image;
+            item.ally = allies[i].allyType;
+            item.price = allies[i].price;
+        }
+    }
+
+    private void SpawnSkillButton()
+    {
+        for (int i = 1; i< skills.Count; i++)
+        {
+            ShopItemButtonAction item = Instantiate (skillBtn, skillBtnHolder.transform);
+            item.image.sprite = skills[i].image;
+            item.skill = skills[i].skillType;
+            item.price = skills[i].price;
+        }
+    }
+
 
     private void ActiveWeapon()
     {
