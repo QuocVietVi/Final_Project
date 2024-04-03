@@ -364,7 +364,9 @@ MonoBehaviour:
   weapon: 0
   shield: 0
   ally: 0
+  skill: 0
   price: 0
+  button: {fileID: 6522650986631846171}
 --- !u!1 &7142633257480713315
 GameObject:
   m_ObjectHideFlags: 0

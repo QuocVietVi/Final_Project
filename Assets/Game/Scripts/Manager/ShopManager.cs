@@ -1,40 +1,73 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ShopManager : MonoBehaviour
+public class ShopManager : Singleton<ShopManager>
 {
     //Shop weapon and shield
+    [Header("Shop weapon and shield")]
     [SerializeField] private Button weaponBtn, shieldBtn;
     [SerializeField] private ShopItemButtonAction shopItem;
     [SerializeField] private GameObject weaponBtnHolder, shieldBtnHolder;
     [SerializeField] private GameObject weaponChoose, shieldChoose, weaponPanel, shieldPanel;
+    public Image wsImage;
+    public GameObject itemInfo;
+    public TextMeshProUGUI wsTitle;
+    public TextMeshProUGUI wsDameAndHp;
 
+    [Space(10)]
     //Shop Ally
+    [Header("Shop Ally")]
     [SerializeField] private ShopItemButtonAction allyBtn;
     [SerializeField] private GameObject allyBtnHolder;
+    public Image allyImage;
+    public GameObject allyInfo;
+    public TextMeshProUGUI allyHp;
+    public TextMeshProUGUI allyDame;
 
+    [Space(10)]
     //Shop skill
+    [Header("Shop skill")]
     [SerializeField] private ShopItemButtonAction skillBtn;
     [SerializeField] private GameObject skillBtnHolder;
-    
+    public Image skillImage;
+    public GameObject skillInfo;
+    public TextMeshProUGUI skillDame;
 
     private List<WeaponData> weapons;
     private List<ShieldData> shields;
     private List<AllyData> allies;
     private List<SkillData> skills;
 
+    [Space(5)]
+    [Header("Other")]
     public WeaponType currentWeapon;
     public ShieldType currentShield;
+    public bool isWeaponShop, isShieldShop;
+    public TextMeshProUGUI priceTxt;
+    public TextMeshProUGUI itemName;
+    public Button buyBtn;
+    public int price;
+
+    [Space(5)]
+    [Header("Status")]
+    public TextMeshProUGUI stars;
+    public TextMeshProUGUI gems;
+    public TextMeshProUGUI golds;
 
 
     private void Start()
     {
-        weapons = SODataManager.Instance.weaponSO.weapons;
-        shields = SODataManager.Instance.shieldSO.shields;
-        allies = SODataManager.Instance.allySO.allies;
-        skills = SODataManager.Instance.skillSO.skills;
+        var data = SODataManager.Instance;
+
+        weapons = data.weaponSO.weapons;
+        shields = data.shieldSO.shields;
+        allies = data.allySO.allies;
+        skills = data.skillSO.skills;
+
+
 
         SpawnWeaponItem();
         SpawnShieldItem();
@@ -43,6 +76,18 @@ public class ShopManager : MonoBehaviour
 
         weaponBtn.onClick.AddListener(ActiveWeapon);
         shieldBtn.onClick.AddListener(ActiveShield);
+        buyBtn.onClick.AddListener(() =>
+        {
+            Buy(price);
+        });
+        isWeaponShop = true;
+    }
+
+    private void Update()
+    {
+        stars.text = SODataManager.Instance.PlayerData.stars.ToString();
+        golds.text = SODataManager.Instance.PlayerData.golds.ToString();
+        gems.text = SODataManager.Instance.PlayerData.gems.ToString();
     }
 
 
@@ -99,6 +144,9 @@ public class ShopManager : MonoBehaviour
         weaponPanel.SetActive(true);
         shieldChoose.SetActive(false);
         shieldPanel.SetActive(false);
+        itemInfo.SetActive(false);
+        isWeaponShop = true;
+        isShieldShop = false;
     }
 
     private void ActiveShield()
@@ -107,6 +155,9 @@ public class ShopManager : MonoBehaviour
         weaponPanel.SetActive(false);
         shieldChoose.SetActive(true);
         shieldPanel.SetActive(true);
+        itemInfo.SetActive(false);
+        isShieldShop = true;
+        isWeaponShop = false;
     }
 
     public void DeactivePanel(GameObject panel)
@@ -114,4 +165,27 @@ public class ShopManager : MonoBehaviour
         panel.SetActive(false);
         SettingManager.Instance.ButtonSoundClick();
     }
+
+    public void ChangeWSText(string title, string dameAndHp)
+    {
+        wsTitle.text = title;
+        wsDameAndHp.text = dameAndHp;
+    }
+
+    public void ChangeAllyText(string hp, string dame)
+    {
+        allyHp.text = hp;
+        allyDame.text = dame;
+    }
+
+    public void ChangeSkillText(string dame)
+    {
+        skillDame.text = dame;
+    }
+
+    private void Buy(int price)
+    {
+        SODataManager.Instance.PlayerData.golds -= price;
+    }
+
 }

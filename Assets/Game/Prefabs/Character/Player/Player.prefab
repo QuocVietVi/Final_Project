@@ -4566,7 +4566,7 @@ MonoBehaviour:
   rb: {fileID: 5361531268099063494}
   anim: {fileID: 3192215195541948500}
   speed: 5
-  maxHp: 1000
+  maxHp: 0
   throwPoint: {fileID: 0}
   attackRange: 5
   target: {fileID: 0}
@@ -4580,8 +4580,8 @@ MonoBehaviour:
   - {fileID: -7827221196242121421, guid: 405bf81549b7def4baee98b221327d4e, type: 3}
   - {fileID: 2057699101191979867, guid: c01d26299f965134f98f54164742ee6f, type: 3}
   - {fileID: -2846127886117718562, guid: dd3ca9140f47e5446bb1c83b64fa7eb6, type: 3}
-  maxEnergy: 100
-  maxMana: 100
+  maxEnergy: 0
+  maxMana: 0
   listSkills:
   - {fileID: 9037581489976123281, guid: 29b817b0c9d409c40913fa7dc54c5d85, type: 3}
   - {fileID: 2923691052809339391, guid: 7185e8db3efeef449922293296ab8d38, type: 3}

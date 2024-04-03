@@ -439,4 +439,7 @@ MonoBehaviour:
   image: {fileID: 7629419259339412890}
   weapon: 0
   shield: 0
+  ally: 0
+  skill: 0
   price: 0
+  button: {fileID: 8721568901424272934}

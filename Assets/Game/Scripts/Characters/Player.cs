@@ -133,6 +133,11 @@ public class Player : Character
     {
         base.OnInit();
         ChangeAnim(ConstantAnim.IDLE);
+        var data = SODataManager.Instance;
+        maxHp = data.PlayerData.maxHp;
+        maxMana = data.PlayerData.maxMana;
+        maxEnergy = data.PlayerData.maxEnergy;
+        Hp = maxHp;
         Mana = maxMana;
         Energy = maxEnergy;
     }

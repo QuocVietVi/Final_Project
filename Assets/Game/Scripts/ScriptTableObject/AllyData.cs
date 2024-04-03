@@ -9,6 +9,8 @@ public class AllyData
     public AllyType allyType;
     public AllyAndEnemy allyPrefab;
     public Sprite image;
+    public int hp;
+    public int damage;
     public int price;
 }
 

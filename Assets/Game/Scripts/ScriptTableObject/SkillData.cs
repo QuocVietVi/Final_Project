@@ -9,6 +9,7 @@ public class SkillData
     public SkillType skillType;
     public SkillCollider skillPrefab;
     public Sprite image;
+    public int damage;
     public int price;
 }
 
