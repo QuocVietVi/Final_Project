@@ -4571,7 +4571,7 @@ MonoBehaviour:
   attackRange: 5
   target: {fileID: 0}
   bulletDamage: 0
-  slashDamage: 20
+  slashDamage: 10
   faction: 1
   spawnPoint: {fileID: 0}
   attackCollider1: {fileID: 6304268786363994474}
@@ -4585,8 +4585,8 @@ MonoBehaviour:
   listSkills:
   - {fileID: 9037581489976123281, guid: 29b817b0c9d409c40913fa7dc54c5d85, type: 3}
   - {fileID: 2923691052809339391, guid: 7185e8db3efeef449922293296ab8d38, type: 3}
-  manaRecovery: 10
-  energyRecovery: 10
+  manaRecovery: 5
+  energyRecovery: 5
 --- !u!1 &8216874469826458460
 GameObject:
   m_ObjectHideFlags: 0

@@ -121,13 +121,13 @@ MonoBehaviour:
   attackRange: 7
   target: {fileID: 0}
   bulletDamage: 0
-  slashDamage: 0
+  slashDamage: 30
   faction: 1
   getTarget: {fileID: 3798399041051820396}
   attackCollider: {fileID: 0}
   bullet: {fileID: 0}
-  delayTime: 0
-  energyNedded: 0
+  delayTime: 2
+  energyNedded: 30
   AEType: 0
 --- !u!1 &703694405441229889
 GameObject:

@@ -16,7 +16,7 @@ public class Map : MonoBehaviour
 
     private void Start()
     {
-        InvokeRepeating(nameof(SpawnEnemy1), 2f, 4f);
+        InvokeRepeating(nameof(SpawnEnemy1), 4f, 4f);
         //InvokeRepeating(nameof(SpawnEnemy2), 4f, 3f);
     }
 
@@ -46,7 +46,7 @@ public class Map : MonoBehaviour
     private void SpawnEnemy1()
     {
         //int index = maxEnemies.Count - 1;
-        if (maxEnemies.Count <= 4 && GameManager.Instance.IsState(GameState.GamePlay))
+        if (maxEnemies.Count <= 6 && GameManager.Instance.IsState(GameState.GamePlay) && enemies[0] != null)
         {
             AllyAndEnemy enemy = Instantiate(enemies[0], spawnPos, spawnPoint.rotation);
             enemy.OnInit();
@@ -58,17 +58,28 @@ public class Map : MonoBehaviour
 
     private void SpawnEnemy2()
     {
-        AllyAndEnemy enemy = Instantiate(enemies[1] , spawnPos, spawnPoint.rotation);
-        enemy.OnInit();
-        maxEnemies.Add(enemy);
+        if (maxEnemies.Count <= 6 && GameManager.Instance.IsState(GameState.GamePlay) && enemies[1] != null)
+        {
+            AllyAndEnemy enemy = Instantiate(enemies[1], spawnPos, spawnPoint.rotation);
+            enemy.OnInit();
+            maxEnemies.Add(enemy);
+        }
 
     }
 
     private void SpawnEnemy3()
     {
-        AllyAndEnemy enemy = Instantiate(enemies[2] , spawnPos, spawnPoint.rotation);
-        enemy.OnInit();
-        maxEnemies.Add(enemy);
+        if (maxEnemies.Count <= 6 && GameManager.Instance.IsState(GameState.GamePlay) && enemies[2] != null)
+        {
+            AllyAndEnemy enemy = Instantiate(enemies[2], spawnPos, spawnPoint.rotation);
+            enemy.OnInit();
+            maxEnemies.Add(enemy);
+        }
+
+    }
+
+    public void SpawnBoss()
+    {
 
     }
 

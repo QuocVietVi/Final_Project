@@ -138,8 +138,8 @@ public class Player : Character
         maxMana = data.PlayerData.maxMana;
         maxEnergy = data.PlayerData.maxEnergy;
         Hp = maxHp;
-        Mana = maxMana;
-        Energy = maxEnergy;
+        Mana = 0;
+        Energy = 0;
     }
 
     protected override void Dead()
@@ -215,7 +215,7 @@ public class Player : Character
             anim.SetTrigger(animName);
             rb.velocity = Vector2.zero;
             isRun = false;
-            energy -= 20;
+            energy -= 3;
             SetAttack();
 
             Invoke(nameof(CanRun), 0.7f);

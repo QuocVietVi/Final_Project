@@ -427,7 +427,7 @@ MonoBehaviour:
   attackCollider: {fileID: 8624740142143538532}
   bullet: {fileID: 0}
   delayTime: 0.5
-  energyNedded: 20
+  energyNedded: 15
   AEType: 0
 --- !u!1 &4622397329960445691
 GameObject:

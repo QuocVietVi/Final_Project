@@ -682,7 +682,7 @@ MonoBehaviour:
   enemies:
   - {fileID: -1338179553649670112, guid: db4ca09d4889a2744bf164573dd3ad0e, type: 3}
   - {fileID: 3099303974015687610, guid: 39ed17b3287ab8f44b1f17639ad6af51, type: 3}
-  - {fileID: -6136784181918536770, guid: 81bc0fe7a78726c41ae8589051e2b7b3, type: 3}
+  - {fileID: 0}
   spawnPoint: {fileID: 4123309415283880229}
   playerSpawnPoint: {fileID: 3484377031915759254}
   allySpawnPoint: {fileID: 2131393266327439937}
@@ -712,7 +712,7 @@ Transform:
   m_GameObject: {fileID: 4223216819841596674}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -4.621119, y: -3.8844297, z: 0.73924905}
+  m_LocalPosition: {x: -4.621119, y: -4.2, z: 0.73924905}
   m_LocalScale: {x: -0.6, y: 0.6, z: 0.6}
   m_ConstrainProportionsScale: 0
   m_Children: []

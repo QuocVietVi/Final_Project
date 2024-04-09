@@ -813,14 +813,14 @@ MonoBehaviour:
   throwPoint: {fileID: 3397108147499881245}
   attackRange: 4
   target: {fileID: 0}
-  bulletDamage: 0
+  bulletDamage: 25
   slashDamage: 0
   faction: 1
   getTarget: {fileID: 2974376765131293710}
   attackCollider: {fileID: 0}
   bullet: {fileID: -3716263594867479772, guid: 9db95ebf62e8f8640bb75a1a06cd394d, type: 3}
   delayTime: 1
-  energyNedded: 0
+  energyNedded: 22
   AEType: 1
 --- !u!1001 &8659057917906662638
 PrefabInstance:

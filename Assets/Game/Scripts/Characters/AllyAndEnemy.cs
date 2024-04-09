@@ -42,13 +42,10 @@ public class AllyAndEnemy : Character
         {
             currentState.OnExcute(this);
         }
-        if(target == null)
-        {
-            target = FindTarget();
-        }
 
         if (target != null && target.IsDead)
         {
+            target = null;
             ChangeAnim(ConstantAnim.IDLE);
         }
         //if (target != null)
@@ -71,6 +68,14 @@ public class AllyAndEnemy : Character
 
     }
 
+    private void FixedUpdate()
+    {
+        if (target == null)
+        {
+            target = FindTarget();
+        }
+    }
+
     public override void OnInit()
     {
         base.OnInit();
@@ -86,12 +91,13 @@ public class AllyAndEnemy : Character
     protected override void Dead()
     {
         base.Dead();
-        Invoke(nameof(Despawn), 1.5f);
+        Invoke(nameof(Despawn), 1f);
         this.GetComponent<Collider2D>().enabled = false;
         ChangeState(null);
         target = null;
         rb.velocity = Vector2.zero;
         targets.Clear();
+        this.tag = "Untagged";
     }
 
     public void Move()

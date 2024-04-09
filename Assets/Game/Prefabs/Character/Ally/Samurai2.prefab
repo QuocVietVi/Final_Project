@@ -543,11 +543,11 @@ MonoBehaviour:
   attackRange: 1.5
   target: {fileID: 0}
   bulletDamage: 0
-  slashDamage: 20
+  slashDamage: 50
   faction: 1
   getTarget: {fileID: 4973401791648544311}
   attackCollider: {fileID: 9182686232198023705}
   bullet: {fileID: 0}
-  delayTime: 0
-  energyNedded: 0
+  delayTime: 3
+  energyNedded: 45
   AEType: 0

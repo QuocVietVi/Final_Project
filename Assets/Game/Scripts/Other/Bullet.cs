@@ -13,7 +13,10 @@ public class Bullet : MonoBehaviour
     {
         Move();
     }
-
+    private void OnEnable()
+    {
+        OnDespawn();
+    }
     private void Move()
     {
         if (attacker.faction == Faction.Ally)
@@ -28,9 +31,14 @@ public class Bullet : MonoBehaviour
 
     }
 
-    private void Despawn()
+    public void Despawn()
     {
         LeanPool.Despawn(this);
+    }
+
+    public void OnDespawn()
+    {
+        Invoke(nameof(Despawn), 1.5f);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

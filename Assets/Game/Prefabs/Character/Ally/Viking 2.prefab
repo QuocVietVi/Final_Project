@@ -538,16 +538,16 @@ MonoBehaviour:
   rb: {fileID: 8027400378218142101}
   anim: {fileID: 949429804271200491}
   speed: 2
-  maxHp: 300
+  maxHp: 400
   throwPoint: {fileID: 0}
   attackRange: 1.5
   target: {fileID: 0}
   bulletDamage: 0
-  slashDamage: 20
+  slashDamage: 35
   faction: 1
   getTarget: {fileID: 5379480586727654172}
   attackCollider: {fileID: 6756630573687873892}
   bullet: {fileID: 0}
-  delayTime: 0
-  energyNedded: 0
+  delayTime: 3
+  energyNedded: 50
   AEType: 0

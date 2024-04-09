@@ -819,8 +819,8 @@ MonoBehaviour:
   getTarget: {fileID: 4148895977268790033}
   attackCollider: {fileID: 0}
   bullet: {fileID: -2149125207986225363, guid: 7f7dc91c43db7e94fb3687414958a373, type: 3}
-  delayTime: 3.5
-  energyNedded: 0
+  delayTime: 1.2
+  energyNedded: 25
   AEType: 2
 --- !u!1001 &1768352530551834413
 PrefabInstance:
