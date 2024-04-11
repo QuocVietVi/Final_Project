@@ -8,6 +8,7 @@ TagManager:
   - Enemy
   - Attack Collider
   - Tower
+  - Portal
   layers:
   - Default
   - TransparentFX

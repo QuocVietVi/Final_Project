@@ -1,6 +1,7 @@
 using Lean.Pool;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using static Cinemachine.DocumentationSortingAttribute;
@@ -156,5 +157,16 @@ public class LevelManager : Singleton<LevelManager>
     private void ButtonSoundClick()
     {
         SettingManager.Instance.ButtonSoundClick();
+    }
+
+    public void SetTextCurrentChapter(int chapter, int level)
+    {
+        GameManager.Instance.screenTransition.chapter.text = "Chapter " + chapter.ToString() + "-" + level.ToString();
+    }
+
+    public void ScreenTransition()
+    {
+        var game = GameManager.Instance;
+        game.SpawnScreenTransition();
     }
 }

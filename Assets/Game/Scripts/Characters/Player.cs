@@ -1,6 +1,7 @@
 ﻿using Lean.Pool;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditorInternal;
 using UnityEngine;
 
 public class Player : Character
@@ -12,6 +13,13 @@ public class Player : Character
     [SerializeField] private List<SkillCollider> listSkills = new List<SkillCollider>();
     [SerializeField] private float manaRecovery, energyRecovery;
 
+    [Space(5)]
+    [Header("Setup")]
+    [SerializeField] private List<DropSlot> setUpItems;
+    [SerializeField] private GameObject weapon;
+    [SerializeField] private Transform weaponHolder;
+    [SerializeField] private SpriteRenderer shield;
+
     private float horizontal;
     private float vertical;
     //private bool onFirstFloor, onSecondFloor;
@@ -20,6 +28,7 @@ public class Player : Character
     private bool doSkill;
     private float energy;
     private float mana;
+    
     private Vector3 spawnPos;
    
 
@@ -48,6 +57,11 @@ public class Player : Character
         }
     }
 
+    private void Awake()
+    {
+        setUpItems = SetupManager.Instance.dropSlots;
+    }
+
     private void Start()
     {
         isRun = true;
@@ -56,6 +70,8 @@ public class Player : Character
         canCallAlly3 = true;
         OnInit();
         spawnPoint = LevelManager.Instance.map.allySpawnPoint;
+
+
     }
     private void FixedUpdate()
     {
@@ -125,7 +141,11 @@ public class Player : Character
         }
         // ----------------------- End input from keyboard -----------------------
 
-        
+        //Game Ui
+        var game = GameManager.Instance;
+        game.SetText(game.playerHp, Mathf.FloorToInt(Hp), maxHp);
+        game.SetText(game.mana, Mathf.FloorToInt(mana), maxMana);
+        game.SetText(game.energy, Mathf.FloorToInt(energy), maxEnergy);
 
     }
 
@@ -140,8 +160,64 @@ public class Player : Character
         Hp = maxHp;
         Mana = 0;
         Energy = 0;
-    }
 
+        //Setup
+        //Ally
+        var allyImages = GameManager.Instance.allySlots;
+        allies[0] = GetAllyData(setUpItems[0].allyType).allyPrefab;
+        allies[1] = GetAllyData(setUpItems[1].allyType).allyPrefab;
+        allies[2] = GetAllyData(setUpItems[2].allyType).allyPrefab;
+        //image
+        for (int i = 0; i < allyImages.Count; i++)
+        {
+            if (allies[i] != null)
+            {
+                allyImages[i].sprite = GetAllyData(setUpItems[i].allyType).image;
+            }
+            else
+            {
+                allyImages[i].sprite = GameManager.Instance.isLokingPic;
+            }
+        }
+        //allyImages[0].sprite = GetAllyData(setUpItems[0].allyType).image;
+        //allyImages[1].sprite = GetAllyData(setUpItems[1].allyType).image;
+        //allyImages[2].sprite = GetAllyData(setUpItems[2].allyType).image;
+        //Skill
+        var skillImages = GameManager.Instance.skillSlots;
+        listSkills[0] = GetSkillData(setUpItems[3].skillType).skillPrefab;
+        listSkills[1] = GetSkillData(setUpItems[4].skillType).skillPrefab;
+        if (listSkills[0] != null)
+        {
+            skillImages[0].sprite = GetSkillData(setUpItems[3].skillType).image;
+        }
+        else
+        {
+            skillImages[0].sprite = GameManager.Instance.isLokingPic;
+        }
+        if (listSkills[1] != null)
+        {
+            skillImages[1].sprite = GetSkillData(setUpItems[4].skillType).image;
+        }
+        else
+        {
+            skillImages[1].sprite = GameManager.Instance.isLokingPic;
+        }
+
+        //Weapon
+        var wData = SODataManager.Instance.GetWeaponData(setUpItems[5].weaponType);
+        weapon = Instantiate(wData.weaponPrefab, weaponHolder);
+        //Shield
+        var sData = SODataManager.Instance.GetShieldData(setUpItems[6].shieldType);
+        shield.sprite = sData.image;
+    }
+    private AllyData GetAllyData(AllyType type)
+    {
+        return SODataManager.Instance.GetAllyData(type);
+    }
+    private SkillData GetSkillData(SkillType type)
+    {
+        return SODataManager.Instance.GetSkillData(type);
+    }
     protected override void Dead()
     {
         base.Dead();
@@ -187,23 +263,34 @@ public class Player : Character
 
     private IEnumerator SpawnAlly1()
     {
-        yield return new WaitForSeconds(allies[0].delayTime);
-        SpawnAlly(allies[0]);
-        canCallAlly1 = true;
+        if (allies[0] != null)
+        {
+            yield return new WaitForSeconds(allies[0].delayTime);
+            SpawnAlly(allies[0]);
+            canCallAlly1 = true;
+        }
+
     }
 
     private IEnumerator SpawnAlly2()
     {
-        yield return new WaitForSeconds(allies[1].delayTime);
-        SpawnAlly(allies[1]);
-        canCallAlly2 = true;
+        if (allies[1] != null)
+        {
+            yield return new WaitForSeconds(allies[1].delayTime);
+            SpawnAlly(allies[1]);
+            canCallAlly2 = true;
+        }
+
     }
 
     private IEnumerator SpawnAlly3()
     {
-        yield return new WaitForSeconds(allies[2].delayTime);
-        SpawnAlly(allies[2]);
-        canCallAlly3 = true;
+        if (allies[2] != null)
+        {
+            yield return new WaitForSeconds(allies[2].delayTime);
+            SpawnAlly(allies[2]);
+            canCallAlly3 = true;
+        }
     }
     //----------------- End Spawn ally ------------------
 
@@ -243,20 +330,24 @@ public class Player : Character
 
     private void UseSkill(string skill, SkillCollider skillPrefab)
     {   
-        if (mana >= skillPrefab.manaNeeded)
+        if (skillPrefab != null)
         {
-            anim.SetTrigger(skill);
-            rb.velocity = Vector2.zero;
-            mana -= skillPrefab.manaNeeded;
-            isRun = false;
-            doSkill = true;
-            Invoke(nameof(CanRun), 0.7f);
-            if (target != null)
+            if (mana >= skillPrefab.manaNeeded)
             {
-                LeanPool.Spawn(skillPrefab, target.transform.position, Quaternion.Euler(Vector2.zero));
+                anim.SetTrigger(skill);
+                rb.velocity = Vector2.zero;
+                mana -= skillPrefab.manaNeeded;
+                isRun = false;
+                doSkill = true;
+                Invoke(nameof(CanRun), 0.7f);
+                if (target != null)
+                {
+                    LeanPool.Spawn(skillPrefab, target.transform.position, Quaternion.Euler(Vector2.zero));
+                }
+                Invoke(nameof(ResetSkill), skillPrefab.despawnTime * 2);
             }
-            Invoke(nameof(ResetSkill), skillPrefab.despawnTime * 2);
         }
+  
         
     }
 
@@ -308,19 +399,22 @@ public class Player : Character
 
     public void StarLevel(GameObject star1, GameObject star2, GameObject star3)
     {
-        if (Hp >= maxHp * 80 / 100)
+        Portal portal = LevelManager.Instance.map.portal;
+        if (Hp >= maxHp * 80 / 100 && portal.Hp >= portal.maxHp * 80/100)
         {
             star1.SetActive(true);
             star2.SetActive(true);
             star3.SetActive(true);
         }
-        if (Hp < maxHp * 80 / 100 && Hp >= maxHp * 30/100)
+        else if ((Hp < maxHp * 80 / 100 && Hp >= maxHp * 30/100) 
+            || (portal.Hp < portal.maxHp * 80 / 100 && portal.Hp >= portal.maxHp * 30 / 100))
         {
             star1.SetActive(true);
             star2.SetActive(true);
             star3.SetActive(false);
         }
-        if (Hp < maxHp * 30 / 100)
+        //if (Hp < maxHp * 30 / 100)
+        else
         {
             star1.SetActive(true);
             star2.SetActive(false);

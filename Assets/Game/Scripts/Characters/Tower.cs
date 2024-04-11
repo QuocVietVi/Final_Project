@@ -32,6 +32,7 @@ public class Tower : MonoBehaviour
         if (!IsDead)
         {
             hp -= damage;
+            GameManager.Instance.enemyTowerHp.text = hp.ToString();
             if (IsDead)
             {
                 hp = 0;

@@ -15,8 +15,10 @@ public class LevelButtonAction : MonoBehaviour
         levelButton.onClick.AddListener(() =>
         {
             SpawnMap(chapter,level);
+            LevelManager.Instance.SetTextCurrentChapter(chapter,level);
             LevelManager.Instance.currentLevel = level;
             SettingManager.Instance.ButtonSoundClick();
+            LevelManager.Instance.ScreenTransition();
         });
     }
 

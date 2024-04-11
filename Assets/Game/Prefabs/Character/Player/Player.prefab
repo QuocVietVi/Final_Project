@@ -1081,7 +1081,7 @@ Transform:
   m_GameObject: {fileID: 1386744190360717975}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.11399993, y: 0.2, z: 0}
+  m_LocalPosition: {x: -0.18, y: 0.02, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1133,7 +1133,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 1.6, y: 1.6}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 0
@@ -4587,6 +4587,10 @@ MonoBehaviour:
   - {fileID: 2923691052809339391, guid: 7185e8db3efeef449922293296ab8d38, type: 3}
   manaRecovery: 5
   energyRecovery: 5
+  setUpItems: []
+  weapon: {fileID: 0}
+  weaponHolder: {fileID: 3007028977131294200}
+  shield: {fileID: 2000128268874567373}
 --- !u!1 &8216874469826458460
 GameObject:
   m_ObjectHideFlags: 0
@@ -4883,6 +4887,10 @@ PrefabInstance:
     - target: {fileID: 2664045442044136184, guid: 0d44c2da09c0b1e44b7b7b67683770da, type: 3}
       propertyPath: m_Name
       value: Stick
+      objectReference: {fileID: 0}
+    - target: {fileID: 2664045442044136184, guid: 0d44c2da09c0b1e44b7b7b67683770da, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3142558814742752092, guid: 0d44c2da09c0b1e44b7b7b67683770da, type: 3}
       propertyPath: m_LocalPosition.x

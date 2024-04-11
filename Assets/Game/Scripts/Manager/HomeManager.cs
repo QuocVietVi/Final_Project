@@ -11,16 +11,32 @@ public class HomeManager : Singleton<HomeManager>
     [SerializeField] private Button setting;
     [SerializeField] private GameObject startScene, homeScene;
     [SerializeField] private GameObject settingPanel;
+    [SerializeField] private GameObject popup;
+    [SerializeField] private Transform popupHolder;
 
-
+    private List<GameObject> popups = new List<GameObject>();
     public GameObject homePanel;
     public TextMeshProUGUI stars;
     public TextMeshProUGUI gems;
     public TextMeshProUGUI golds;
+    public bool canSpawnLevel;
+
     private void Start()
     {
+        canSpawnLevel = false;
+
         GameManager.Instance.ChangeState(GameState.MainMenu);
-        play.onClick.AddListener(SpawnLevelButton);
+        play.onClick.AddListener(() => {
+            if (canSpawnLevel == true)
+            {
+                SpawnLevelButton();
+            }
+            else
+            {
+                Popup();
+            }
+        });
+
         tapToStart.onClick.AddListener(CloseStartPanel);
         setting.onClick.AddListener(ActiveSetting);
     }
@@ -34,6 +50,7 @@ public class HomeManager : Singleton<HomeManager>
 
     private void SpawnLevelButton()
     {
+
         LevelManager.Instance.levelPanel.SetActive(true);
         homePanel.SetActive(false);
         SettingManager.Instance.PlayMusic(ConstantSound.THEME);
@@ -66,5 +83,30 @@ public class HomeManager : Singleton<HomeManager>
         SettingManager.Instance.ButtonSoundClick();
 
     }
+
+    public void Popup()
+    {
+        if (popups.Count < 1)
+        {
+            GameObject p = Instantiate(popup, popupHolder);
+            popups.Add(p);
+            Destroy(popups[0].gameObject, 4f);
+            Invoke(nameof(ClearList), 4f);
+        }
+
+
+        //if (popups.Count == 1)
+        //{
+        //    Destroy(popups[0].gameObject);
+        //    popups.Clear();
+        //}
+    }
+
+    private void ClearList()
+    {
+        popups.Clear();
+    }
+
+
 
 }

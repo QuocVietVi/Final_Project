@@ -220,9 +220,16 @@ public class AllyAndEnemy : Character
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.tag == "Attack Collider")
+        if (collision.CompareTag(ConstantTag.PORTAL) && this.faction == Faction.Enemy)
         {
-            //ChangeAnim("Hurt");
+            Portal portal = collision.GetComponent<Portal>();
+            portal.Hp--;
+            GameManager.Instance.portalHp.text = portal.Hp.ToString();
+            if (portal.IsDead)
+            {
+                portal.Dead();
+            }
+            Despawn();
         }
     }
 

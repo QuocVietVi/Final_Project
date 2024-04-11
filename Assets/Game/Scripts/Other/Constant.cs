@@ -28,6 +28,7 @@ public static class ConstantTag
     public static string ALLY = "Ally";
     public static string TOWER = "Tower";
     public static string ATTACKCOLLIDER = "Attack Collider";
+    public static string PORTAL = "Portal";
 
 
 }

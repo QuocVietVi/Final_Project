@@ -15,4 +15,8 @@ public class ButtonSetup : MonoBehaviour
 {
     public Image image;
     public ItemType itemType;
+    public WeaponType weaponType;
+    public ShieldType shieldType;
+    public AllyType allyType;
+    public SkillType skillType;
 }

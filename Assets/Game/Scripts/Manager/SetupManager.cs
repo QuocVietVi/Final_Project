@@ -12,6 +12,8 @@ public class SetupManager : Singleton<SetupManager>
     [SerializeField] private Button weapon, shield, ally, skill;
     private List<ButtonSetup> items = new List<ButtonSetup>();
     private ButtonSetup item;
+
+    public List<DropSlot> dropSlots = new List<DropSlot>();
     private void Start()
     {
         weapon.onClick.AddListener(SpawnWeapons);
@@ -32,6 +34,8 @@ public class SetupManager : Singleton<SetupManager>
             WeaponData wData = data.GetWeaponData((WeaponType)data.PlayerData.weaponsOwned[i]);
             item.image.sprite = wData.image;
             item.itemType = ItemType.Weapon;
+            item.skillType = SkillType.Default;
+            item.weaponType = wData.weaponType;
             items.Add(item);
         }
         DeactiveFocus();
@@ -49,6 +53,7 @@ public class SetupManager : Singleton<SetupManager>
             ShieldData sData = data.GetShieldData((ShieldType)data.PlayerData.shieldsOwned[i]);
             item.image.sprite = sData.image;
             item.itemType = ItemType.Shield;
+            item.shieldType = sData.shieldType;
             items.Add(item);
         }
         DeactiveFocus();
@@ -65,6 +70,7 @@ public class SetupManager : Singleton<SetupManager>
             AllyData aData = data.GetAllyData((AllyType)data.PlayerData.alliesOwned[i]);
             item.image.sprite = aData.image;
             item.itemType = ItemType.Ally;
+            item.allyType = aData.allyType;
             items.Add(item);
         }
         DeactiveFocus();
@@ -81,6 +87,8 @@ public class SetupManager : Singleton<SetupManager>
             SkillData sData = data.GetSkillData((SkillType)data.PlayerData.skillsOwned[i]);
             item.image.sprite = sData.image;
             item.itemType = ItemType.Skill;
+            item.skillType = sData.skillType;
+            item.weaponType = WeaponType.Default;
             items.Add(item);
         }
         DeactiveFocus();
@@ -106,5 +114,20 @@ public class SetupManager : Singleton<SetupManager>
         shieldFocus.SetActive(false);
         allyFocus.SetActive(false) ;
         skillFocus.SetActive(false);
+    }
+
+    public void CheckSetup()
+    {
+        var items = dropSlots;
+        if (items[0].itemImage != null || items[1].itemImage != null || items[2].itemImage != null)
+        {
+            HomeManager.Instance.canSpawnLevel = true;
+        }
+        else
+        {
+            HomeManager.Instance.canSpawnLevel = false;
+            HomeManager.Instance.Popup();
+
+        }
     }
 }

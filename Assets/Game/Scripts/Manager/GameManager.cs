@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -10,8 +11,12 @@ public enum GameState
 
 public class GameManager : Singleton<GameManager>
 {
+    [Header("Pause")]
     [SerializeField] private Button resume, menu, replay, setting;
     [SerializeField] private GameObject menuPanel;
+
+    [Space(10)]
+    [Header("Victory, Gameover")]
     [SerializeField] private GameObject star1, star2, star3;
     [SerializeField] private GameObject victoryPanel, gameOverPanel, settingPanel;
     //victory
@@ -19,13 +24,29 @@ public class GameManager : Singleton<GameManager>
     //game over
     [SerializeField] private Button continueGame, backToMenu;
 
-    private bool isPaused;
-    private Player player;
+    [Space(10)]
+    [Header("In game")]
+    public List<Image> allySlots;
+    public List<Image> skillSlots;
+    public Sprite isLokingPic;
+    public TextMeshProUGUI playerHp;
+    public TextMeshProUGUI mana;
+    public TextMeshProUGUI energy;
+    public TextMeshProUGUI enemyTowerHp;
+    public TextMeshProUGUI portalHp;
+    public List<Image> allySlotsFill;
 
+    [Space(10)]
+    [Header("Other")]
     public GameState gameState;
     public Transform camera;
     public GameObject pausePanel;
 
+    public ScreenTransition screenTransition;
+    public Transform screenHolder;
+    public TextMeshProUGUI chapterTitle;
+    private bool isPaused;
+    private Player player;
 
     private void Start()
     {
@@ -56,6 +77,7 @@ public class GameManager : Singleton<GameManager>
                 Pause();
             }
         }
+
     }
 
     public void ChangeState(GameState state)
@@ -155,5 +177,30 @@ public class GameManager : Singleton<GameManager>
     private void ButtonSoundClick()
     {
         SettingManager.Instance.ButtonSoundClick();
+    }
+
+    public void ImageExist()
+    {
+        for (int i = 0; i < allySlots.Count; i++)
+        {
+            if (allySlots[i] == null)
+            {
+                allySlots[i].sprite = isLokingPic;
+            }
+        }
+    }
+
+    public void SetText(TextMeshProUGUI Tmp ,float? a, float? b)
+    {
+        if (a != null && b != null)
+        {
+            Tmp.text = a + " / " + b;
+        }
+    }
+
+    public void SpawnScreenTransition()
+    {
+        ScreenTransition screen = Instantiate(screenTransition, screenHolder);
+        Destroy(screen.gameObject, 4f);
     }
 }

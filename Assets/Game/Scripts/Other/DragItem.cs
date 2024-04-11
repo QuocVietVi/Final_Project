@@ -11,10 +11,18 @@ public class DragItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
     public bool isDropped;
     public ButtonSetup buttonSetup;
     public ItemType itemType;
+    public WeaponType weaponType;
+    public ShieldType shieldType;
+    public AllyType allyType;
+    public SkillType skillType;
 
     private void Update()
     {
         this.itemType = buttonSetup.itemType;
+        this.weaponType = buttonSetup.weaponType;
+        this.shieldType = buttonSetup.shieldType;
+        this.allyType = buttonSetup.allyType;
+        this.skillType = buttonSetup.skillType;
     }
 
     public void OnBeginDrag(PointerEventData eventData)

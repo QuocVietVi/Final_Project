@@ -13,6 +13,7 @@ public class Map : MonoBehaviour
     public Transform playerSpawnPoint;
     public Transform allySpawnPoint;
     public Tower tower;
+    public Portal portal;
 
     private void Start()
     {
