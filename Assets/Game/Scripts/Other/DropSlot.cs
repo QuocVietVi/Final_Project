@@ -25,7 +25,10 @@ public class DropSlot : MonoBehaviour, IDropHandler
         DragItem item = dropped.GetComponent<DragItem>();
         if (item.itemType == this.itemType )
         {
-            ItemExist(item);
+            if (dropSlots.Count > 0 )
+            {
+                ItemExist(item);
+            }
             if (transform.childCount >= 1)
             {
                 Destroy(transform.GetChild(0).gameObject);
@@ -64,7 +67,7 @@ public class DropSlot : MonoBehaviour, IDropHandler
             
 
         }
-        if (dropSlots[0].skillType != SkillType.Default && dropSlots[0].itemType == ItemType.Skill)
+        if (dropSlots[0].itemType == ItemType.Skill && dropSlots[0].skillType != SkillType.Default )
         {
             if (dropSlots[0].skillType == item.skillType)
             {

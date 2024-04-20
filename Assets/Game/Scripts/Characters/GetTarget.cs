@@ -18,6 +18,7 @@ public class GetTarget : MonoBehaviour
             if (player != null)
             {
                 player.SetTarget(collision.GetComponent<Character>());
+                player.SetTarget2(collision.GetComponent<Character>());
             }
         }
 

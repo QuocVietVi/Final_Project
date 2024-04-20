@@ -37,6 +37,7 @@ public class Character : MonoBehaviour
         }
     }
 
+
     public virtual void OnInit()
     {
         hp = maxHp;
@@ -101,5 +102,19 @@ public class Character : MonoBehaviour
     public float GetHpNormalized()
     {
         return hp / maxHp;
+    }
+    protected void RemoveTarget()
+    {
+        if (targets.Count > 0)
+        {
+            for (int i = 0; i < targets.Count; i++)
+            {
+                if (targets[i] == null)
+                {
+                    targets.RemoveAt(i);
+                    //Debug.Log("remove");
+                }
+            }
+        }
     }
 }

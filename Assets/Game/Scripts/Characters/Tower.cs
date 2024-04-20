@@ -25,6 +25,11 @@ public class Tower : MonoBehaviour
     protected virtual void Dead()
     {
         GameManager.Instance.Victory();
+        var data = SODataManager.Instance.PlayerData;
+        var map = LevelManager.Instance.map;
+        data.golds += map.gold;
+        data.gems += map.gem;
+        
     }
 
     public void OnHit(float damage)

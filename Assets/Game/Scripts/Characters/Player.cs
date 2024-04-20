@@ -1,6 +1,7 @@
 ﻿using Lean.Pool;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEditorInternal;
 using UnityEngine;
 
@@ -12,7 +13,8 @@ public class Player : Character
     [SerializeField] private float maxEnergy, maxMana;
     [SerializeField] private List<SkillCollider> listSkills = new List<SkillCollider>();
     [SerializeField] private float manaRecovery, energyRecovery;
-
+    [SerializeField] private float attackEnergyNeeded;
+    [SerializeField] private float skillRange;
     [Space(5)]
     [Header("Setup")]
     [SerializeField] private List<DropSlot> setUpItems;
@@ -28,9 +30,11 @@ public class Player : Character
     private bool doSkill;
     private float energy;
     private float mana;
-    
+    private List<AllyAndEnemy> maxAllies = new List<AllyAndEnemy>();
     private Vector3 spawnPos;
-   
+    private List<Character> listSkillTargets = new List<Character>();
+    private Character skillTarget;
+    
 
     public float Energy
     {
@@ -75,8 +79,9 @@ public class Player : Character
     }
     private void FixedUpdate()
     {
-
+        RemoveAllies();
         target = FindTarget();
+        skillTarget = FindTarget2();
         Debug.DrawLine(transform.position, transform.position + Vector3.right *attackRange, Color.red);
         if (!IsDead)
         {
@@ -163,20 +168,22 @@ public class Player : Character
 
         //Setup
         //Ally
-        var allyImages = GameManager.Instance.allySlots;
+        var allyInfo = GameManager.Instance;
         allies[0] = GetAllyData(setUpItems[0].allyType).allyPrefab;
         allies[1] = GetAllyData(setUpItems[1].allyType).allyPrefab;
         allies[2] = GetAllyData(setUpItems[2].allyType).allyPrefab;
-        //image
-        for (int i = 0; i < allyImages.Count; i++)
+        //image and text
+        for (int i = 0; i < allyInfo.allySlots.Count; i++)
         {
             if (allies[i] != null)
             {
-                allyImages[i].sprite = GetAllyData(setUpItems[i].allyType).image;
+                allyInfo.allySlots[i].sprite = GetAllyData(setUpItems[i].allyType).image;
+                allyInfo.alliesEnergy[i].text = allies[i].energyNedded.ToString();
             }
             else
             {
-                allyImages[i].sprite = GameManager.Instance.isLokingPic;
+                allyInfo.allySlots[i].sprite = GameManager.Instance.isLokingPic;
+                allyInfo.alliesEnergy[i].text = "0";
             }
         }
         //allyImages[0].sprite = GetAllyData(setUpItems[0].allyType).image;
@@ -206,6 +213,7 @@ public class Player : Character
         //Weapon
         var wData = SODataManager.Instance.GetWeaponData(setUpItems[5].weaponType);
         weapon = Instantiate(wData.weaponPrefab, weaponHolder);
+        slashDamage += wData.damage;
         //Shield
         var sData = SODataManager.Instance.GetShieldData(setUpItems[6].shieldType);
         shield.sprite = sData.image;
@@ -251,11 +259,12 @@ public class Player : Character
 
     private void SpawnAlly(AllyAndEnemy allies)
     {
-        if (energy >= allies.energyNedded)
+        if (energy >= allies.energyNedded && maxAllies.Count < LevelManager.Instance.map.maxAllies)
         {
             AllyAndEnemy ally = Instantiate(allies, spawnPos, Quaternion.Euler(Vector3.zero));
             
             energy -= allies.energyNedded;
+            maxAllies.Add(ally);
         }
 
 
@@ -297,31 +306,35 @@ public class Player : Character
     //----------------- Attack ------------------
     private void Attack(string animName)
     {
-        if (energy >= 20)
-        {
-            anim.SetTrigger(animName);
-            rb.velocity = Vector2.zero;
-            isRun = false;
-            energy -= 3;
-            SetAttack();
-
-            Invoke(nameof(CanRun), 0.7f);
-        }
+        anim.SetTrigger(animName);
+        rb.velocity = Vector2.zero;
+        isRun = false;
+        energy -= attackEnergyNeeded;
+        SetAttack();
+        Invoke(nameof(CanRun), 0.7f);
 
     }
 
     private void Shash()
     {
-        Attack(ConstantAnim.ATTACK);
-        attackCollider1.SetActive(true);
-        Invoke(nameof(ResetAttack), 0.5f);
+        if (energy >= attackEnergyNeeded)
+        {
+            Attack(ConstantAnim.ATTACK);
+            attackCollider1.SetActive(true);
+            Invoke(nameof(ResetAttack), 0.5f);
+        }
+            
     }
 
     private void Poked()
     {
-        Attack(ConstantAnim.ATTACK2);
-        attackCollider2.SetActive(true);
-        Invoke(nameof(ResetAttack), 0.5f);
+        if (energy >= attackEnergyNeeded)
+        {
+            Attack(ConstantAnim.ATTACK2);
+            attackCollider2.SetActive(true);
+            Invoke(nameof(ResetAttack), 0.5f);
+        }
+
     }
 
     //------------------ End Attack ---------------------
@@ -343,6 +356,10 @@ public class Player : Character
                 if (target != null)
                 {
                     LeanPool.Spawn(skillPrefab, target.transform.position, Quaternion.Euler(Vector2.zero));
+                }
+                if (target == null && skillTarget != null)
+                {
+                    LeanPool.Spawn(skillPrefab, skillTarget.transform.position, Quaternion.Euler(Vector2.zero));
                 }
                 Invoke(nameof(ResetSkill), skillPrefab.despawnTime * 2);
             }
@@ -400,7 +417,10 @@ public class Player : Character
     public void StarLevel(GameObject star1, GameObject star2, GameObject star3)
     {
         Portal portal = LevelManager.Instance.map.portal;
-        if (Hp >= maxHp * 80 / 100 && portal.Hp >= portal.maxHp * 80/100)
+        var hpPercentage = Hp / maxHp * 100;
+        var portalHpPercentage = portal.Hp / portal.maxHp * 100;
+
+        if (Hp >= maxHp * 80 / 100 && hpPercentage >= 80 && portal.Hp >= portal.maxHp * 80/100)
         {
             star1.SetActive(true);
             star2.SetActive(true);
@@ -425,6 +445,46 @@ public class Player : Character
     public void Revive()
     {
         Hp = maxHp * 80 / 100; 
+    }
+
+    private void RemoveAllies()
+    {
+        if (maxAllies.Count > 0)
+        {
+            for (int i = 0; i < maxAllies.Count; i++)
+            {
+                if (maxAllies[i] == null)
+                {
+                    maxAllies.RemoveAt(i);
+                    Debug.Log("remove");
+                }
+            }
+        }
+
+    }
+
+    public void SetTextAlly(TextMeshProUGUI ally)
+    {
+        ally.text = maxAllies.Count.ToString();
+    }
+
+    public virtual void SetTarget2(Character character)
+    {
+        listSkillTargets.Add(character);
+    }
+
+
+    public Character FindTarget2()
+    {
+        Character target = null;
+        for (int i = 0; i < listSkillTargets.Count; i++)
+        {
+            if (listSkillTargets[i] != null && Vector2.Distance(listSkillTargets[i].transform.position, transform.position) < skillRange)
+            {
+                target = listSkillTargets[i];
+            }
+        }
+        return target;
     }
 
     //private AllyAndEnemy FindEnemy(LayerMask enemy)

@@ -46,6 +46,7 @@ public class AllyAndEnemy : Character
         if (target != null && target.IsDead)
         {
             target = null;
+            canAttack = false;
             ChangeAnim(ConstantAnim.IDLE);
         }
         //if (target != null)
@@ -74,6 +75,10 @@ public class AllyAndEnemy : Character
         {
             target = FindTarget();
         }
+        if (target != null)
+        {
+            canAttack = true;
+        }
     }
 
     public override void OnInit()
@@ -92,7 +97,7 @@ public class AllyAndEnemy : Character
     {
         base.Dead();
         Invoke(nameof(Despawn), 1f);
-        this.GetComponent<Collider2D>().enabled = false;
+        //this.GetComponent<Collider2D>().enabled = false;
         ChangeState(null);
         target = null;
         rb.velocity = Vector2.zero;
@@ -102,16 +107,20 @@ public class AllyAndEnemy : Character
 
     public void Move()
     {
-        ChangeAnim(ConstantAnim.RUN);
-        //rb.velocity = transform.right * speed;
-        if (this.faction == Faction.Enemy)
+        if (GameManager.Instance.IsState(GameState.GamePlay))
         {
-            rb.velocity = Vector2.left * speed;
+            ChangeAnim(ConstantAnim.RUN);
+            //rb.velocity = transform.right * speed;
+            if (this.faction == Faction.Enemy)
+            {
+                rb.velocity = Vector2.left * speed;
+            }
+            if (this.faction == Faction.Ally)
+            {
+                rb.velocity = Vector2.right * speed;
+            }
         }
-        if (this.faction == Faction.Ally)
-        {
-            rb.velocity = Vector2.right * speed;
-        }
+
 
     }
 
@@ -124,20 +133,24 @@ public class AllyAndEnemy : Character
 
     public void Attack()
     {
-        ChangeAnim(ConstantAnim.ATTACK);
-        if (this.AEType == AllyAndEnemyType.CloseRange)
+        if (canAttack == true && GameManager.Instance.IsState(GameState.GamePlay))
         {
-            SetAttack();
-            Invoke(nameof(ResetAttack), 0.5f);
+            ChangeAnim(ConstantAnim.ATTACK);
+            if (this.AEType == AllyAndEnemyType.CloseRange)
+            {
+                SetAttack();
+                Invoke(nameof(ResetAttack), 0.5f);
+            }
+            if (this.AEType == AllyAndEnemyType.Healing)
+            {
+                Invoke(nameof(Shoot), 1f);
+            }
+            if (this.AEType == AllyAndEnemyType.LongRange)
+            {
+                Invoke(nameof(Shoot), 0.75f);
+            }
         }
-        if (this.AEType == AllyAndEnemyType.Healing)
-        {
-            Invoke(nameof(Shoot), 1f);
-        }
-        if (this.AEType == AllyAndEnemyType.LongRange)
-        {
-            Invoke(nameof(Shoot), 0.75f);
-        }
+
 
     }
     private void Shoot()

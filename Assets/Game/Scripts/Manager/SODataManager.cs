@@ -9,13 +9,15 @@ public class SODataManager : Singleton<SODataManager>
     public AllySO allySO;
     public SkillSO skillSO;
     private PlayerData playerData;
+    private LevelDataLocal levelData;
 
     public PlayerData PlayerData { get => playerData; set => playerData = value; }
-
+    public LevelDataLocal LevelData { get => levelData; set => levelData = value; }
 
     private void Awake()
     {
         GetPlayerData();
+        GetLevelData();
     }
 
     public WeaponData GetWeaponData(WeaponType weaponType)
@@ -52,4 +54,20 @@ public class SODataManager : Singleton<SODataManager>
             Debug.Log("Creating New User Data");
         }
     }
+
+    public void GetLevelData()
+    {
+        if (DataManager.Instance.HasData<LevelDataLocal>())
+        {
+            LevelData = DataManager.Instance.LoadData<LevelDataLocal>();
+            Debug.Log("Loaded User Data.");
+        }
+        else
+        {
+            LevelData = new LevelDataLocal();
+            DataManager.Instance.SaveData(LevelData);
+            Debug.Log("Creating New User Data");
+        }
+    }
+
 }

@@ -35,6 +35,9 @@ public class GameManager : Singleton<GameManager>
     public TextMeshProUGUI enemyTowerHp;
     public TextMeshProUGUI portalHp;
     public List<Image> allySlotsFill;
+    public TextMeshProUGUI numberAllies;
+    public TextMeshProUGUI maxAllies;
+    public List<TextMeshProUGUI> alliesEnergy;
 
     [Space(10)]
     [Header("Other")]
@@ -77,7 +80,15 @@ public class GameManager : Singleton<GameManager>
                 Pause();
             }
         }
-
+        var map = LevelManager.Instance.map;
+        if (map != null)
+        {
+            maxAllies.text = map.maxAllies.ToString();
+        }
+        if (player != null)
+        {
+            player.SetTextAlly(numberAllies);
+        }
     }
 
     public void ChangeState(GameState state)
@@ -150,6 +161,7 @@ public class GameManager : Singleton<GameManager>
     {
         victoryPanel.SetActive(true);
         player.StarLevel(star1, star2, star3);
+        ChangeState(GameState.GameWin);
     }
 
     public void GameOver()

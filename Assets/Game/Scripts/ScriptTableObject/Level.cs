@@ -12,4 +12,5 @@ public class Level
 {
     public Chapter chapter;
     public List<int> level;
+    public List<int> stars;
 }

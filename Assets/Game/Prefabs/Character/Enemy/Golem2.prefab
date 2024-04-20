@@ -467,13 +467,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rb: {fileID: 6982575769317047841}
   anim: {fileID: 4950036217241784397}
-  speed: 2
-  maxHp: 100
+  speed: 1.5
+  maxHp: 150
   throwPoint: {fileID: 0}
   attackRange: 1.25
   target: {fileID: 0}
   bulletDamage: 0
-  slashDamage: 20
+  slashDamage: 30
   faction: 0
   getTarget: {fileID: 8303501367166720554}
   attackCollider: {fileID: 7749587632569532654}

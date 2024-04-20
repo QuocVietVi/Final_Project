@@ -189,7 +189,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rb: {fileID: 6692331976795900753}
   anim: {fileID: 1936013323114338086}
-  speed: 2
+  speed: 1.5
   maxHp: 400
   throwPoint: {fileID: 0}
   attackRange: 1.5

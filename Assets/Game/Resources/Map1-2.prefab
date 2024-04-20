@@ -16063,11 +16063,16 @@ MonoBehaviour:
   enemies:
   - {fileID: -1338179553649670112, guid: db4ca09d4889a2744bf164573dd3ad0e, type: 3}
   - {fileID: 3099303974015687610, guid: 39ed17b3287ab8f44b1f17639ad6af51, type: 3}
-  - {fileID: -6136784181918536770, guid: 81bc0fe7a78726c41ae8589051e2b7b3, type: 3}
+  - {fileID: 0}
   spawnPoint: {fileID: 4152597655987223930}
+  maxEnemiesInGame: 0
   playerSpawnPoint: {fileID: 6872350475657539141}
   allySpawnPoint: {fileID: 6190075061960996247}
   tower: {fileID: 4310398020866207481}
+  portal: {fileID: 0}
+  maxAllies: 7
+  gold: 0
+  gem: 0
 --- !u!1 &8767773958817174458
 GameObject:
   m_ObjectHideFlags: 0

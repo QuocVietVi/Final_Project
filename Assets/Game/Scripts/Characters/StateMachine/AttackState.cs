@@ -5,12 +5,16 @@ using UnityEngine;
 public class AttackState : IState
 {
     float timer;
+    bool canAttack = true;
     public void OnEnter(AllyAndEnemy allyAndEnemy)
     {
         if (allyAndEnemy.target != null || LevelManager.Instance.map.tower != null)
         {
             allyAndEnemy.StopMoving();
             allyAndEnemy.Attack();
+
+
+
         }
         timer = 0;
     }
@@ -22,11 +26,11 @@ public class AttackState : IState
         {
             allyAndEnemy.ChangeState(new MoveState());
         }
-        if (timer >= 1.5f && allyAndEnemy.AEType == AllyAndEnemyType.LongRange)
+        if (timer >= 2f && allyAndEnemy.AEType == AllyAndEnemyType.LongRange)
         {
             allyAndEnemy.ChangeState(new MoveState());
         }
-        if (timer >= 2f && allyAndEnemy.AEType == AllyAndEnemyType.Healing)
+        if (timer >= 1.5f && allyAndEnemy.AEType == AllyAndEnemyType.Healing)
         {
             allyAndEnemy.ChangeState(new MoveState());
         }

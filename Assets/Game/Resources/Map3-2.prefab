@@ -15221,6 +15221,8 @@ MonoBehaviour:
   playerSpawnPoint: {fileID: 819450338140243593}
   allySpawnPoint: {fileID: 5638004815212275257}
   tower: {fileID: 7450440913475923451}
+  portal: {fileID: 0}
+  maxAllies: 9
 --- !u!1 &5225284091566042128
 GameObject:
   m_ObjectHideFlags: 0
