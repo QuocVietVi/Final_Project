@@ -11,7 +11,6 @@ public class LevelManager : Singleton<LevelManager>
     [SerializeField] private LevelSO levelSO;
     [SerializeField] private LevelButtonAction levelButton;
     [SerializeField] private Transform buttonHolder1, buttonHolder2, buttonHolder3;
-    [SerializeField] private Chapter currentChapter;
     [SerializeField] private Button prev, next;
     [SerializeField] private Button back;
     [SerializeField] private List<GameObject> panelChapter;
@@ -22,6 +21,9 @@ public class LevelManager : Singleton<LevelManager>
     public Map map;
     public Player player;
     public int currentLevel;
+    public Chapter currentChapter;
+    public int stars;
+    public int starsWin;
 
     private void Start()
     {
@@ -35,9 +37,7 @@ public class LevelManager : Singleton<LevelManager>
         // End button onclick
 
         // Spawn button
-        SpawnButton(Chapter.Chapter1, buttonHolder1);
-        SpawnButton(Chapter.Chapter2, buttonHolder2);
-        SpawnButton(Chapter.Chapter3, buttonHolder3);
+        //SpawnAllButton();
     }
 
     public void SpawnButton(Chapter chapter, Transform buttonHolder)
@@ -48,10 +48,31 @@ public class LevelManager : Singleton<LevelManager>
             {
                 LevelButtonAction button = LeanPool.Spawn(levelButton, buttonHolder);
                 button.levelText.text = levelSO.levels[(int)chapter].level[i].ToString();
-                button.SetOnClick((int)levelSO.levels[(int)chapter].chapter +1, levelSO.levels[(int)chapter].level[i]);
+                button.SetOnClick((int)levelSO.levels[(int)chapter].chapter +1, levelSO.levels[(int)chapter].level[i], levelSO.levels[(int)chapter].stars[i]);
                 button.levelPanel = this.levelPanel;
                 buttons.Add(button);
             }
+        }
+    }
+    public void SpawnAllButton()
+    {
+        SpawnButton(Chapter.Chapter1, buttonHolder1);
+        SpawnButton(Chapter.Chapter2, buttonHolder2);
+        SpawnButton(Chapter.Chapter3, buttonHolder3);
+    }
+    public void DespawnAllButton()
+    {
+        for (int i = 0; i < buttons.Count; i++)
+        {
+            Destroy(buttons[i].gameObject);
+        }
+        buttons.Clear();
+    }
+    public void SetStar(Chapter chapter)
+    {
+        if (levelSO.levels[(int)chapter].chapter == chapter) 
+        {
+            levelSO.levels[(int)chapter].stars[currentLevel-1] = this.stars;
         }
     }
 
@@ -152,6 +173,7 @@ public class LevelManager : Singleton<LevelManager>
         levelPanel.SetActive(false);
         homePanel.SetActive(true);
         ButtonSoundClick();
+        DespawnAllButton();
     }
 
     private void ButtonSoundClick()

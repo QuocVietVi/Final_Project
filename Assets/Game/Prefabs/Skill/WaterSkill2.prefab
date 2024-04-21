@@ -81,10 +81,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 674911cee7cf7314bb41027ba1c79c5f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  skillDamage: 20
+  skillDamage: 70
   col: {fileID: 2383695963630872979}
   despawnTime: 0.6
-  manaNeeded: 20
+  manaNeeded: 38
 --- !u!1 &8093382211125926677
 GameObject:
   m_ObjectHideFlags: 0

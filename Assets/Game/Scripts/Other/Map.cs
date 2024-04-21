@@ -1,4 +1,4 @@
-using Lean.Pool;
+﻿using Lean.Pool;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -23,7 +23,10 @@ public class Map : MonoBehaviour
     {
         timeDelay1 = 3;
         InvokeRepeating(nameof(SpawnEnemy1), 4f, timeDelay1); // time 1: start sau bao lau thi goi, time 2: delay repeat 
-        InvokeRepeating(nameof(SpawnEnemy2), 6f, 5f);
+        InvokeRepeating(nameof(SpawnEnemy2), 6f, 6f);
+        InvokeRepeating(nameof(SpawnEnemy3), 6f, 4f);
+        //SpawnAllEnemies()
+        //StartCoroutine(SpawnEnemiesRepeatedly());
     }
 
     private void Update()
@@ -72,9 +75,12 @@ public class Map : MonoBehaviour
     {
         if (maxEnemies.Count <= maxEnemiesInGame && GameManager.Instance.IsState(GameState.GamePlay) && enemies[1] != null)
         {
-            AllyAndEnemy enemy = Instantiate(enemies[1], spawnPos, spawnPoint.rotation);
-            enemy.OnInit();
-            maxEnemies.Add(enemy);
+            if (maxEnemies.Count >= maxEnemiesInGame / 3)
+            {
+                AllyAndEnemy enemy = Instantiate(enemies[1], spawnPos, spawnPoint.rotation);
+                enemy.OnInit();
+                maxEnemies.Add(enemy);
+            }
         }
 
     }
@@ -83,9 +89,13 @@ public class Map : MonoBehaviour
     {
         if (maxEnemies.Count <= maxEnemiesInGame && GameManager.Instance.IsState(GameState.GamePlay) && enemies[2] != null)
         {
-            AllyAndEnemy enemy = Instantiate(enemies[2], spawnPos, spawnPoint.rotation);
-            enemy.OnInit();
-            maxEnemies.Add(enemy);
+            if (maxEnemies.Count >= maxEnemiesInGame / 3)
+            {
+                AllyAndEnemy enemy = Instantiate(enemies[2], spawnPos, spawnPoint.rotation);
+                enemy.OnInit();
+                maxEnemies.Add(enemy);
+            }
+
         }
 
     }
@@ -94,6 +104,28 @@ public class Map : MonoBehaviour
     {
 
     }
+
+    //IEnumerator SpawnEnemiesRepeatedly()
+    //{
+    //    while (true)
+    //    {
+    //        SpawnEnemy1();
+    //        yield return new WaitForSeconds(4f);
+
+    //        SpawnEnemy2();
+    //        yield return new WaitForSeconds(5f);
+
+    //        SpawnEnemy3();
+    //        yield return new WaitForSeconds(6f);
+    //    }
+    //}
+
+    //public void SpawnAllEnemies()
+    //{
+    //    Invoke(nameof(SpawnEnemy1), 4f);
+    //    Invoke(nameof(SpawnEnemy2), 5f);
+    //    Invoke(nameof(SpawnEnemy3), 4f);
+    //}
 
     //public void DespawnAllEnemy()
     //{

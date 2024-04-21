@@ -162,5 +162,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: -2171234655985106794}
-  speed: 2
+  speed: 3
   attacker: {fileID: 0}

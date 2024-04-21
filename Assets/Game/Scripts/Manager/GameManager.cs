@@ -125,13 +125,17 @@ public class GameManager : Singleton<GameManager>
         menuPanel.SetActive(true);
         ChangeState(GameState.MainMenu);
         ButtonSoundClick();
+        LevelManager.Instance.DespawnAllButton();
     }
 
     public void Claim()
     {
+        var level = LevelManager.Instance;
         victoryPanel.SetActive(false);
         BackToMenu();
         ButtonSoundClick();
+        level.DespawnAllButton();
+        level.SetStar(level.currentChapter);
     }
 
     public void Replay()
@@ -159,6 +163,7 @@ public class GameManager : Singleton<GameManager>
 
     public void Victory()
     {
+        var level = LevelManager.Instance;
         victoryPanel.SetActive(true);
         player.StarLevel(star1, star2, star3);
         ChangeState(GameState.GameWin);

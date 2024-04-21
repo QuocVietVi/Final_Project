@@ -13,6 +13,9 @@ public class PlayerData
     public float maxHp;
     public float maxMana;
     public float maxEnergy;
+    public float damage;
+    public float manaRecovery;
+    public float energyRecovery;
 
     public List<int> alliesOwned;
     public List<int> skillsOwned;
@@ -24,6 +27,9 @@ public class PlayerData
         golds = gems = stars = 0;
         maxHp = 1000;
         maxMana = maxEnergy = 100;
+        damage = 15;
+        manaRecovery = 4;
+        energyRecovery = 4.6f;
         alliesOwned = new List<int>();
         skillsOwned = new List<int>();
         weaponsOwned = new List<int>();

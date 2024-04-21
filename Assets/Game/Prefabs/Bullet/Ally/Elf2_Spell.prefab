@@ -163,7 +163,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 989361287919210079}
-  speed: 2
+  speed: 3
   attacker: {fileID: 0}
 --- !u!1 &8010794399143593232
 GameObject:

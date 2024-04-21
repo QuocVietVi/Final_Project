@@ -26,10 +26,34 @@ public class Tower : MonoBehaviour
     {
         GameManager.Instance.Victory();
         var data = SODataManager.Instance.PlayerData;
-        var map = LevelManager.Instance.map;
-        data.golds += map.gold;
-        data.gems += map.gem;
-        
+        var level = LevelManager.Instance;
+        data.golds += level.map.gold;
+        data.gems += level.map.gem;
+        //data.stars += level.stars;
+        if (level.starsWin == 1 && level.stars == 3) 
+        {
+            data.stars += 1;
+            level.stars -= 1;
+        }
+        if (level.starsWin == 2)
+        {
+            if (level.stars == 3)
+            {
+                data.stars += 2;
+                level.stars -= 2;
+            }
+            if (level.stars == 2)
+            {
+                data.stars += 1;
+                level.stars -= 1;
+            }
+        }
+        if (level.starsWin == 3)
+        {
+            data.stars += level.stars;
+            level.stars -= level.stars;
+        }
+        DataManager.Instance.SaveData(data);
     }
 
     public void OnHit(float damage)

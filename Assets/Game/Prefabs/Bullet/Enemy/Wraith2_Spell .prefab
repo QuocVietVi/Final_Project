@@ -135,7 +135,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: -8125205166687634021}
-  speed: 4
+  speed: 3
   attacker: {fileID: 0}
 --- !u!50 &-8125205166687634021
 Rigidbody2D:

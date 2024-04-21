@@ -50,7 +50,7 @@ public class HomeManager : Singleton<HomeManager>
 
     private void SpawnLevelButton()
     {
-
+        LevelManager.Instance.SpawnAllButton();
         LevelManager.Instance.levelPanel.SetActive(true);
         homePanel.SetActive(false);
         SettingManager.Instance.PlayMusic(ConstantSound.THEME);

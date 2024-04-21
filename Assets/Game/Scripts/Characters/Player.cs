@@ -162,6 +162,9 @@ public class Player : Character
         maxHp = data.PlayerData.maxHp;
         maxMana = data.PlayerData.maxMana;
         maxEnergy = data.PlayerData.maxEnergy;
+        slashDamage = data.PlayerData.damage;
+        manaRecovery = data.PlayerData.manaRecovery;
+        energyRecovery = data.PlayerData.energyRecovery;
         Hp = maxHp;
         Mana = 0;
         Energy = 0;
@@ -417,18 +420,21 @@ public class Player : Character
     public void StarLevel(GameObject star1, GameObject star2, GameObject star3)
     {
         Portal portal = LevelManager.Instance.map.portal;
+        var level = LevelManager.Instance;
         var hpPercentage = Hp / maxHp * 100;
         var portalHpPercentage = portal.Hp / portal.maxHp * 100;
 
-        if (Hp >= maxHp * 80 / 100 && hpPercentage >= 80 && portal.Hp >= portal.maxHp * 80/100)
+        if (hpPercentage >= 80 && portalHpPercentage >= 80)
         {
+            level.starsWin = 3;
             star1.SetActive(true);
             star2.SetActive(true);
             star3.SetActive(true);
         }
-        else if ((Hp < maxHp * 80 / 100 && Hp >= maxHp * 30/100) 
-            || (portal.Hp < portal.maxHp * 80 / 100 && portal.Hp >= portal.maxHp * 30 / 100))
+        else if ((hpPercentage < 80 && hpPercentage >= 30) 
+            || (portalHpPercentage < 80  && portalHpPercentage >= 30))
         {
+            level.starsWin = 2;
             star1.SetActive(true);
             star2.SetActive(true);
             star3.SetActive(false);
@@ -436,6 +442,7 @@ public class Player : Character
         //if (Hp < maxHp * 30 / 100)
         else
         {
+            level.starsWin = 1;
             star1.SetActive(true);
             star2.SetActive(false);
             star3.SetActive(false);

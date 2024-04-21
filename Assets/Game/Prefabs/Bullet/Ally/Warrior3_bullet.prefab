@@ -127,7 +127,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 8085608583809930772}
-  speed: 2
+  speed: 3
   attacker: {fileID: 0}
 --- !u!61 &4163906228118630454
 BoxCollider2D:
