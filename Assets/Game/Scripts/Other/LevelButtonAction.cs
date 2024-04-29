@@ -10,16 +10,20 @@ public class LevelButtonAction : MonoBehaviour
     public TextMeshProUGUI levelText;
     public GameObject levelPanel;
     public Map map;
-    public void SetOnClick(int chapter, int level, int star)
+    public void SetOnClick(int chapter, int level, int stars, int golds, int gems)
     {
         levelButton.onClick.AddListener(() =>
         {
+            var levelManager = LevelManager.Instance;
             SpawnMap(chapter,level);
-            LevelManager.Instance.SetTextCurrentChapter(chapter,level);
-            LevelManager.Instance.currentLevel = level;
-            LevelManager.Instance.stars = star;
+            levelManager.SetTextCurrentChapter(chapter,level);
+            levelManager.currentLevel = level;
+            levelManager.stars = stars;
+            levelManager.golds = golds;
+            levelManager.gems = gems;
             SettingManager.Instance.ButtonSoundClick();
-            LevelManager.Instance.ScreenTransition();
+            levelManager.ScreenTransition();
+            GameManager.Instance.SetTextReward(golds,gems);
         });
     }
 

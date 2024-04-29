@@ -813,7 +813,7 @@ MonoBehaviour:
   throwPoint: {fileID: 3397108147499881245}
   attackRange: 4
   target: {fileID: 0}
-  bulletDamage: 25
+  bulletDamage: 30
   slashDamage: 0
   faction: 1
   getTarget: {fileID: 2974376765131293710}

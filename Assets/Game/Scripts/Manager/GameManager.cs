@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public enum GameState
 {
-    MainMenu, GamePlay, MiddleStage, GameOver, GameWin, Restart
+    MainMenu, GamePlay, MiddleStage, GameOver, GameWin, Restart, Boss
 }
 
 public class GameManager : Singleton<GameManager>
@@ -23,6 +23,8 @@ public class GameManager : Singleton<GameManager>
     [SerializeField] private Button claim;
     //game over
     [SerializeField] private Button continueGame, backToMenu;
+    [SerializeField] private TextMeshProUGUI goldTxt;
+    [SerializeField] private TextMeshProUGUI gemTxt;
 
     [Space(10)]
     [Header("In game")]
@@ -135,7 +137,7 @@ public class GameManager : Singleton<GameManager>
         BackToMenu();
         ButtonSoundClick();
         level.DespawnAllButton();
-        level.SetStar(level.currentChapter);
+        level.SetResources(level.currentChapter);
     }
 
     public void Replay()
@@ -167,6 +169,38 @@ public class GameManager : Singleton<GameManager>
         victoryPanel.SetActive(true);
         player.StarLevel(star1, star2, star3);
         ChangeState(GameState.GameWin);
+
+        var data = SODataManager.Instance.PlayerData;
+
+        //data.stars += level.stars;
+        if (level.starsWin == 1 && level.stars == 3)
+        {
+            data.stars += 1;
+            level.stars -= 1;
+        }
+        if (level.starsWin == 2)
+        {
+            if (level.stars == 3)
+            {
+                data.stars += 2;
+                level.stars -= 2;
+            }
+            if (level.stars == 2)
+            {
+                data.stars += 1;
+                level.stars -= 1;
+            }
+        }
+        if (level.starsWin == 3)
+        {
+            data.stars += level.stars;
+            data.golds += level.golds;
+            data.gems += level.gems;
+            level.stars -= level.stars;
+            level.golds -= level.golds;
+            level.gems -= level.gems;
+        }
+        DataManager.Instance.SaveData(data);
     }
 
     public void GameOver()
@@ -219,5 +253,11 @@ public class GameManager : Singleton<GameManager>
     {
         ScreenTransition screen = Instantiate(screenTransition, screenHolder);
         Destroy(screen.gameObject, 4f);
+    }
+
+    public void SetTextReward(int gold, int gem)
+    {
+        goldTxt.text = gold.ToString();
+        gemTxt.text = gem.ToString();
     }
 }

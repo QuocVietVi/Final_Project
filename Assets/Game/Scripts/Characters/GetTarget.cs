@@ -44,6 +44,18 @@ public class GetTarget : MonoBehaviour
 
     }
 
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.tag == ConstantTag.ENEMY)
+        {
+           
+            if (player != null)
+            {
+                player.RemoveTarget();
+            }
+        }
+    }
+
 
 
 }

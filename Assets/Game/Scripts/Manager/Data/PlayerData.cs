@@ -28,11 +28,11 @@ public class PlayerData
         maxHp = 1000;
         maxMana = maxEnergy = 100;
         damage = 15;
-        manaRecovery = 4;
+        manaRecovery = 4.6f;
         energyRecovery = 4.6f;
-        alliesOwned = new List<int>();
+        alliesOwned = new List<int> {1};
         skillsOwned = new List<int>();
-        weaponsOwned = new List<int>();
+        weaponsOwned = new List<int> {1};
         shieldsOwned = new List<int>();
     }
 

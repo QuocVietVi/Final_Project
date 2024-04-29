@@ -34,7 +34,6 @@ public class AttackState : IState
         {
             allyAndEnemy.ChangeState(new MoveState());
         }
-
     }
 
     public void OnExit(AllyAndEnemy allyAndEnemy)

@@ -21,25 +21,25 @@ MonoBehaviour:
   - skillType: 1
     skillPrefab: {fileID: 3237765683458084835, guid: 77f0936a4ef22634d885901868d8f0ab, type: 3}
     image: {fileID: 21300000, guid: bdeb9e194a4bd5c4f86b28038c7f6f1e, type: 3}
-    damage: 40
-    price: 800
+    damage: 50
+    price: 30
   - skillType: 2
     skillPrefab: {fileID: 9037581489976123281, guid: 29b817b0c9d409c40913fa7dc54c5d85, type: 3}
     image: {fileID: 21300000, guid: 09c551fad69b0a04d869508c7bdd621a, type: 3}
-    damage: 50
-    price: 1000
+    damage: 60
+    price: 50
   - skillType: 3
     skillPrefab: {fileID: 5437995982085280871, guid: bc4416aa8a78ac141956379f8bba7755, type: 3}
     image: {fileID: 21300000, guid: 6e44880710cd3534c854c0ca3d8ced1b, type: 3}
-    damage: 60
-    price: 1200
+    damage: 70
+    price: 70
   - skillType: 4
     skillPrefab: {fileID: 8446434604125424148, guid: 71096ebe8386c824dad9e5edfe14a2f7, type: 3}
     image: {fileID: 21300000, guid: 225051f5e1503374e979a6584acd4828, type: 3}
-    damage: 70
-    price: 1800
+    damage: 80
+    price: 80
   - skillType: 5
     skillPrefab: {fileID: 2923691052809339391, guid: 7185e8db3efeef449922293296ab8d38, type: 3}
     image: {fileID: 21300000, guid: e20049a2316beb441b5a767b69a747df, type: 3}
     damage: 100
-    price: 2500
+    price: 120

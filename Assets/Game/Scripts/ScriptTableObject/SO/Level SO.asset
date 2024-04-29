@@ -14,11 +14,44 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   levels:
   - chapter: 0
-    level: 010000000200000003000000
-    stars: 00000000030000000300000003000000
+    levelInfo:
+    - level: 1
+      stars: 3
+      golds: 500
+      gems: 30
+    - level: 2
+      stars: 1
+      golds: 500
+      gems: 35
+    - level: 3
+      stars: 3
+      golds: 1000
+      gems: 50
   - chapter: 1
-    level: 01000000020000000300000004000000
-    stars: 03000000030000000300000003000000
+    levelInfo:
+    - level: 1
+      stars: 3
+      golds: 500
+      gems: 0
+    - level: 2
+      stars: 3
+      golds: 500
+      gems: 0
+    - level: 3
+      stars: 3
+      golds: 500
+      gems: 0
   - chapter: 2
-    level: 0100000002000000030000000400000005000000
-    stars: 0300000003000000030000000300000003000000
+    levelInfo:
+    - level: 1
+      stars: 3
+      golds: 0
+      gems: 0
+    - level: 2
+      stars: 3
+      golds: 0
+      gems: 0
+    - level: 3
+      stars: 3
+      golds: 0
+      gems: 0

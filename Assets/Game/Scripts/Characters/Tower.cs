@@ -15,6 +15,7 @@ public class Tower : MonoBehaviour
     private void Start()
     {
         hp = maxHp;
+        GameManager.Instance.enemyTowerHp.text = hp.ToString();
     }
 
     public float GetHpNormalized()
@@ -25,35 +26,7 @@ public class Tower : MonoBehaviour
     protected virtual void Dead()
     {
         GameManager.Instance.Victory();
-        var data = SODataManager.Instance.PlayerData;
-        var level = LevelManager.Instance;
-        data.golds += level.map.gold;
-        data.gems += level.map.gem;
-        //data.stars += level.stars;
-        if (level.starsWin == 1 && level.stars == 3) 
-        {
-            data.stars += 1;
-            level.stars -= 1;
-        }
-        if (level.starsWin == 2)
-        {
-            if (level.stars == 3)
-            {
-                data.stars += 2;
-                level.stars -= 2;
-            }
-            if (level.stars == 2)
-            {
-                data.stars += 1;
-                level.stars -= 1;
-            }
-        }
-        if (level.starsWin == 3)
-        {
-            data.stars += level.stars;
-            level.stars -= level.stars;
-        }
-        DataManager.Instance.SaveData(data);
+       
     }
 
     public void OnHit(float damage)
@@ -70,6 +43,20 @@ public class Tower : MonoBehaviour
             //healthBar.SetNewHp(hp);
             //Instantiate(combatTextPrefab, transform.position + Vector3.up, Quaternion.identity).OnInit(damage);
         }
+    }
+    public void Despawn()
+    {
+        Destroy(this.gameObject,1f);
+    }
+
+    public bool CanSpawnBoss()
+    {
+        if (hp <= maxHp * 0.2) // mau duoi 20 % => true
+        {
+            return true;
+            
+        }
+        return false;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

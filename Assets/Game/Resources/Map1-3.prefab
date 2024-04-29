@@ -4933,12 +4933,13 @@ MonoBehaviour:
   - {fileID: 3099303974015687610, guid: 39ed17b3287ab8f44b1f17639ad6af51, type: 3}
   - {fileID: -6136784181918536770, guid: 81bc0fe7a78726c41ae8589051e2b7b3, type: 3}
   spawnPoint: {fileID: 6359514082153778010}
-  maxEnemiesInGame: 0
+  maxEnemiesInGame: 6
+  boss: {fileID: 5996444908560684230, guid: 6a48b03455f8fc9488d96bb8d4eb7002, type: 3}
   playerSpawnPoint: {fileID: 7547211741422411556}
   allySpawnPoint: {fileID: 7950497631711958185}
   tower: {fileID: 2386031101479820546}
   portal: {fileID: 8379486330417806588}
-  maxAllies: 7
+  maxAllies: 8
   gold: 0
   gem: 0
 --- !u!1 &1048475256551776504
@@ -16088,7 +16089,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 184d8a6b7712c724ba98355ddd95a047, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHp: 1000
+  maxHp: 1200
 --- !u!1 &7537442941850168427
 GameObject:
   m_ObjectHideFlags: 0

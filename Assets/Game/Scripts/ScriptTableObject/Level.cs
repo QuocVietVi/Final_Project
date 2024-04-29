@@ -11,6 +11,15 @@ public enum Chapter
 public class Level 
 {
     public Chapter chapter;
-    public List<int> level;
-    public List<int> stars;
+    //public List<int> level;
+    //public List<int> stars;
+    public List<LevelInfo> levelInfo;
+}
+[Serializable]
+public class LevelInfo
+{
+    public int level;
+    public int stars;
+    public int golds;
+    public int gems;
 }

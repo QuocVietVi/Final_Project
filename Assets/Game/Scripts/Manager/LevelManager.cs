@@ -24,6 +24,8 @@ public class LevelManager : Singleton<LevelManager>
     public Chapter currentChapter;
     public int stars;
     public int starsWin;
+    public int golds;
+    public int gems;
 
     private void Start()
     {
@@ -44,11 +46,14 @@ public class LevelManager : Singleton<LevelManager>
     {
         if (levelSO.levels[(int)chapter].chapter == chapter) // tim chapter hien tai trong SO
         {
-            for (int i = 0; i < levelSO.levels[(int)chapter].level.Count; i++) //duyet list level cua chapter do
+            
+            for (int i = 0; i < levelSO.levels[(int)chapter].levelInfo.Count; i++) //duyet list level cua chapter do
             {
                 LevelButtonAction button = LeanPool.Spawn(levelButton, buttonHolder);
-                button.levelText.text = levelSO.levels[(int)chapter].level[i].ToString();
-                button.SetOnClick((int)levelSO.levels[(int)chapter].chapter +1, levelSO.levels[(int)chapter].level[i], levelSO.levels[(int)chapter].stars[i]);
+                var levelInfo = levelSO.levels[(int)chapter].levelInfo[i];
+                button.levelText.text = levelSO.levels[(int)chapter].levelInfo[i].level.ToString();
+                button.SetOnClick((int)levelSO.levels[(int)chapter].chapter +1,
+                    levelInfo.level, levelInfo.stars, levelInfo.golds, levelInfo.gems);
                 button.levelPanel = this.levelPanel;
                 buttons.Add(button);
             }
@@ -68,11 +73,15 @@ public class LevelManager : Singleton<LevelManager>
         }
         buttons.Clear();
     }
-    public void SetStar(Chapter chapter)
+    public void SetResources(Chapter chapter)
     {
         if (levelSO.levels[(int)chapter].chapter == chapter) 
         {
-            levelSO.levels[(int)chapter].stars[currentLevel-1] = this.stars;
+            //levelSO.levels[(int)chapter].stars[currentLevel-1] = this.stars;
+            var levelData = levelSO.levels[(int)chapter].levelInfo[currentLevel - 1];
+            levelData.stars = this.stars;
+            levelData.gems = this.gems;
+            levelData.golds = this.golds;
         }
     }
 

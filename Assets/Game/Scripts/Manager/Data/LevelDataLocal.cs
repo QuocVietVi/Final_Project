@@ -18,9 +18,4 @@ public class LevelDataLocal
     //}
 }
 
-public class LevelInfo
-{
-    public int chapter;
-    public int level;
-    public int stars;
-}
+

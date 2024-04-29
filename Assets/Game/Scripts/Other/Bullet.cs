@@ -9,15 +9,15 @@ public class Bullet : MonoBehaviour
     [SerializeField] private float speed;
     public AllyAndEnemy attacker;
     // Update is called once per frame
-    void FixedUpdate()
+    protected void FixedUpdate()
     {
         Move();
     }
     private void OnEnable()
     {
-        OnDespawn();
+        OnDespawn(1.5f);
     }
-    private void Move()
+    protected void Move()
     {
         if (attacker.faction == Faction.Ally)
         {
@@ -36,9 +36,9 @@ public class Bullet : MonoBehaviour
         LeanPool.Despawn(this);
     }
 
-    public void OnDespawn()
+    public virtual void OnDespawn(float time)
     {
-        Invoke(nameof(Despawn), 1.5f);
+        Invoke(nameof(Despawn), time);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -45,10 +46,15 @@ public class ShopManager : Singleton<ShopManager>
     [Header("Other")]
     public WeaponType currentWeapon;
     public ShieldType currentShield;
+    public AllyType currentAlly;
+    public SkillType currentSkill;
     public bool isWeaponShop, isShieldShop;
     public TextMeshProUGUI priceTxt;
+    public TextMeshProUGUI gemTxt;
     public TextMeshProUGUI itemName;
     public Button buyBtn;
+    public Button buyBtnGem;
+    public GameObject ownBtn;
     public int price;
 
     [Space(5)]
@@ -57,6 +63,7 @@ public class ShopManager : Singleton<ShopManager>
     public TextMeshProUGUI gems;
     public TextMeshProUGUI golds;
 
+    private PlayerData playerData;  
 
     private void Start()
     {
@@ -78,16 +85,21 @@ public class ShopManager : Singleton<ShopManager>
         shieldBtn.onClick.AddListener(ActiveShield);
         buyBtn.onClick.AddListener(() =>
         {
-            Buy(price);
+            BuyWithGold(price);
+        });
+        buyBtnGem.onClick.AddListener(() =>
+        {
+            BuyWithGem(price);
         });
         isWeaponShop = true;
     }
 
     private void Update()
     {
-        stars.text = SODataManager.Instance.PlayerData.stars.ToString();
-        golds.text = SODataManager.Instance.PlayerData.golds.ToString();
-        gems.text = SODataManager.Instance.PlayerData.gems.ToString();
+        playerData = SODataManager.Instance.PlayerData;
+        stars.text = playerData.stars.ToString();
+        golds.text = playerData.golds.ToString();
+        gems.text = playerData.gems.ToString();
     }
 
 
@@ -147,6 +159,7 @@ public class ShopManager : Singleton<ShopManager>
         itemInfo.SetActive(false);
         isWeaponShop = true;
         isShieldShop = false;
+        SetItemTypeDefault();
     }
 
     private void ActiveShield()
@@ -158,12 +171,21 @@ public class ShopManager : Singleton<ShopManager>
         itemInfo.SetActive(false);
         isShieldShop = true;
         isWeaponShop = false;
+        SetItemTypeDefault();
     }
 
     public void DeactivePanel(GameObject panel)
     {
         panel.SetActive(false);
         SettingManager.Instance.ButtonSoundClick();
+    }
+
+    public void SetItemTypeDefault()
+    {
+        currentShield = ShieldType.Shield_0;
+        currentWeapon = WeaponType.Default;
+        currentAlly = AllyType.Default;
+        currentSkill = SkillType.Default;
     }
 
     public void ChangeWSText(string title, string dameAndHp)
@@ -183,9 +205,77 @@ public class ShopManager : Singleton<ShopManager>
         skillDame.text = dame;
     }
 
-    private void Buy(int price)
+    private void BuyWithGold(int price)
     {
-        SODataManager.Instance.PlayerData.golds -= price;
+
+        if(playerData.golds >= this.price)
+        {
+            if (currentWeapon != WeaponType.Default)
+            {
+                playerData.weaponsOwned.Add((int)currentWeapon);
+                GoldDeduction();
+            }
+            if (currentShield != ShieldType.Shield_0)
+            {
+                playerData.shieldsOwned.Add((int)currentShield);
+                GoldDeduction();
+            }
+            if (currentAlly != AllyType.Default)
+            {
+                playerData.alliesOwned.Add((int)currentAlly);
+                GoldDeduction();
+            }
+            ActiveButtonOwn();
+        }
     }
+
+    private void BuyWithGem(int price)
+    {
+
+        if (playerData.gems >= this.price && currentSkill != SkillType.Default)
+        {
+            playerData.gems -= price;
+            playerData.skillsOwned.Add((int)currentSkill);
+            DataManager.Instance.SaveData(playerData);
+            ActiveButtonOwn();
+        }
+    }
+
+    private void GoldDeduction()
+    {
+        playerData.golds -= price;
+        DataManager.Instance.SaveData(playerData);
+    }
+
+    public void CheckOwned()
+    {
+        var playerData = SODataManager.Instance.PlayerData;
+        var weapons = playerData.weaponsOwned;
+        var shields = playerData.shieldsOwned;
+        var allies = playerData.alliesOwned;
+        var skills = playerData.skillsOwned;
+
+        if (weapons.Contains((int)currentWeapon) || shields.Contains((int)currentShield)
+                || allies.Contains((int)currentAlly) || skills.Contains((int)currentSkill))
+        {
+            ActiveButtonOwn();
+        }
+        else
+        {
+            DeactiveButtonOwn();
+        }
+
+    }
+
+    private void ActiveButtonOwn()
+    {
+        ownBtn.SetActive(true);
+    }
+
+    private void DeactiveButtonOwn()
+    {
+        ownBtn.SetActive(false);
+    }
+
 
 }

@@ -8,9 +8,13 @@ public class Map : MonoBehaviour
     [SerializeField] private List<AllyAndEnemy> enemies = new List<AllyAndEnemy>();
     [SerializeField] private Transform spawnPoint;
     [SerializeField] private int maxEnemiesInGame;
+    [SerializeField] private Boss boss;
     private List<AllyAndEnemy> maxEnemies = new List<AllyAndEnemy>();
+    private List<AllyAndEnemy> maxEnemiesLongRange = new List<AllyAndEnemy>();
+
     private Vector3 spawnPos;
     private float timeDelay1, timeDelay2, timeDelay3;
+    private bool bossSpawned;
 
     public Transform playerSpawnPoint;
     public Transform allySpawnPoint;
@@ -21,19 +25,32 @@ public class Map : MonoBehaviour
 
     private void Start()
     {
-        timeDelay1 = 3;
-        InvokeRepeating(nameof(SpawnEnemy1), 4f, timeDelay1); // time 1: start sau bao lau thi goi, time 2: delay repeat 
+        timeDelay1 = 4;
+        InvokeRepeating(nameof(SpawnEnemy1), 4f, 3f); // time 1: start sau bao lau thi goi, time 2: delay repeat 
         InvokeRepeating(nameof(SpawnEnemy2), 6f, 6f);
-        InvokeRepeating(nameof(SpawnEnemy3), 6f, 4f);
+        InvokeRepeating(nameof(SpawnEnemy3), 6f, 7f);
+        bossSpawned = false;
         //SpawnAllEnemies()
         //StartCoroutine(SpawnEnemiesRepeatedly());
     }
 
     private void Update()
     {
-        spawnPos = new Vector3(spawnPoint.position.x, Random.RandomRange(spawnPoint.position.y, spawnPoint.position.y + 0.7f), 0);
+        if(spawnPoint != null)
+        {
+            spawnPos = new Vector3(spawnPoint.position.x, Random.RandomRange(spawnPoint.position.y, spawnPoint.position.y + 0.7f), 0);
+        }
         RemoveEnemy();
-        
+        if (boss != null)
+        {
+            if (tower.CanSpawnBoss() == true && bossSpawned == false)
+            {
+                SpawnBoss();
+                //GameManager.Instance.ChangeState(GameState.Boss);
+                bossSpawned = true;
+                tower.Despawn();
+            }
+        }
     }
 
     private void RemoveEnemy()
@@ -49,13 +66,23 @@ public class Map : MonoBehaviour
                 }
             }
         }
+        if (maxEnemiesLongRange.Count > 0)
+        {
+            for (int i = 0; i < maxEnemiesLongRange.Count; i++)
+            {
+                if (maxEnemiesLongRange[i] == null)
+                {
+                    maxEnemiesLongRange.RemoveAt(i);
+                }
+            }
+        }
         
     }
 
     private void SpawnEnemy1()
     {
         //int index = maxEnemies.Count - 1;
-        if (maxEnemies.Count < maxEnemiesInGame && GameManager.Instance.IsState(GameState.GamePlay) && enemies[0] != null)
+        if (maxEnemies.Count < maxEnemiesInGame && GameManager.Instance.IsState(GameState.GamePlay) && enemies[0] != null && spawnPoint != null)
         {
             //if (maxEnemies.Count < maxEnemiesInGame / 3)
             //{
@@ -75,7 +102,7 @@ public class Map : MonoBehaviour
     {
         if (maxEnemies.Count <= maxEnemiesInGame && GameManager.Instance.IsState(GameState.GamePlay) && enemies[1] != null)
         {
-            if (maxEnemies.Count >= maxEnemiesInGame / 3)
+            if (maxEnemies.Count >= maxEnemiesInGame / 3 && spawnPoint != null)
             {
                 AllyAndEnemy enemy = Instantiate(enemies[1], spawnPos, spawnPoint.rotation);
                 enemy.OnInit();
@@ -89,11 +116,12 @@ public class Map : MonoBehaviour
     {
         if (maxEnemies.Count <= maxEnemiesInGame && GameManager.Instance.IsState(GameState.GamePlay) && enemies[2] != null)
         {
-            if (maxEnemies.Count >= maxEnemiesInGame / 3)
+            if (maxEnemiesLongRange.Count < 2 && spawnPoint != null)
             {
                 AllyAndEnemy enemy = Instantiate(enemies[2], spawnPos, spawnPoint.rotation);
                 enemy.OnInit();
                 maxEnemies.Add(enemy);
+                maxEnemiesLongRange.Add(enemy);
             }
 
         }
@@ -102,7 +130,8 @@ public class Map : MonoBehaviour
 
     public void SpawnBoss()
     {
-
+        Instantiate(boss, spawnPos, spawnPoint.rotation);
+        
     }
 
     //IEnumerator SpawnEnemiesRepeatedly()
@@ -139,5 +168,12 @@ public class Map : MonoBehaviour
     public void Despawn()
     {
         Destroy(this.gameObject);
+        //this.gameObject.SetActive(false);
+    }
+
+    public void DeActive()
+    {
+        this.gameObject.SetActive(false);
+
     }
 }

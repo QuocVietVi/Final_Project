@@ -77,6 +77,7 @@ public class Player : Character
 
 
     }
+
     private void FixedUpdate()
     {
         RemoveAllies();
@@ -220,6 +221,7 @@ public class Player : Character
         //Shield
         var sData = SODataManager.Instance.GetShieldData(setUpItems[6].shieldType);
         shield.sprite = sData.image;
+        maxHp += sData.bonusHp;
     }
     private AllyData GetAllyData(AllyType type)
     {
@@ -383,6 +385,12 @@ public class Player : Character
 
     // ------------------ End skill --------------------
 
+    public void RemoveTarget()
+    {
+        target = null;
+        skillTarget = null;
+    }
+
     private void ResetAttack()
     {
         isAttack = false;
@@ -494,6 +502,18 @@ public class Player : Character
         return target;
     }
 
+    public bool ActiveIndicatorTarget(Character playerTarget)
+    {
+        if (target != null && playerTarget == target)
+        {
+            return true;
+        }
+        if (skillTarget != null && target == null && playerTarget == skillTarget)
+        {
+            return true;
+        }
+        return false;
+    }
     //private AllyAndEnemy FindEnemy(LayerMask enemy)
     //{
     //    Debug.DrawLine(transform.position, transform.position + Vector3.down * 0.8f, Color.red);

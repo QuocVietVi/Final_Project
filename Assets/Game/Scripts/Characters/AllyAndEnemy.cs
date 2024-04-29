@@ -18,12 +18,12 @@ public enum Faction
 public class AllyAndEnemy : Character
 {
     
-    [SerializeField] private GameObject getTarget;
-    [SerializeField] private AttackCollider attackCollider;
-    [SerializeField] private Bullet bullet;
+    [SerializeField] protected GameObject getTarget;
+    [SerializeField] protected AttackCollider attackCollider;
+    [SerializeField] protected Bullet bullet;
+    [SerializeField] protected GameObject targetIndicator;
     private IState currentState;
     private bool canAttack;
-
     
     public float delayTime;
     public float energyNedded;
@@ -34,9 +34,10 @@ public class AllyAndEnemy : Character
     private void Start()
     {
         OnInit();
+        speed = 3;
     }
 
-    private void Update()
+    protected void Update()
     {
         if (currentState != null)
         {
@@ -49,6 +50,23 @@ public class AllyAndEnemy : Character
             canAttack = false;
             ChangeAnim(ConstantAnim.IDLE);
         }
+        var player = CameraFollow.Instance.target;
+        
+        if (player != null)
+        {
+            if (targetIndicator != null)
+            {
+                if (player.ActiveIndicatorTarget(this) == true)
+                {
+                    targetIndicator.SetActive(true);
+                }
+                else
+                {
+                    targetIndicator.SetActive(false);
+                }
+            }
+        }
+
         //if (target != null)
         //{
         //    getTarget.SetActive(false);
@@ -69,7 +87,7 @@ public class AllyAndEnemy : Character
 
     }
 
-    private void FixedUpdate()
+    protected void FixedUpdate()
     {
         if (target == null)
         {
@@ -85,7 +103,7 @@ public class AllyAndEnemy : Character
     {
         base.OnInit();
         ChangeState(new MoveState());
-        speed = 3;
+
 
     }
 
@@ -131,7 +149,7 @@ public class AllyAndEnemy : Character
         rb.velocity = Vector2.zero;
     }
 
-    public void Attack()
+    public virtual void Attack()
     {
         if (canAttack == true && GameManager.Instance.IsState(GameState.GamePlay))
         {
@@ -153,7 +171,7 @@ public class AllyAndEnemy : Character
 
 
     }
-    private void Shoot()
+    protected void Shoot()
     {
         Bullet b = LeanPool.Spawn(bullet, throwPoint.position, throwPoint.rotation);
         b.attacker = this;
@@ -208,17 +226,21 @@ public class AllyAndEnemy : Character
 
     public void ChangeState(IState newState)
     {
-        //khi đổi sang state mới, check xem state cũ có = null ko
-        if (currentState != null)
+        if (GameManager.Instance.IsState(GameState.GamePlay))
         {
-            currentState.OnExit(this);
-        }
-        currentState = newState;
+            //khi đổi sang state mới, check xem state cũ có = null ko
+            if (currentState != null)
+            {
+                currentState.OnExit(this);
+            }
+            currentState = newState;
 
-        if (currentState != null)
-        {
-            currentState.OnEnter(this);
+            if (currentState != null)
+            {
+                currentState.OnEnter(this);
+            }
         }
+
     }
 
     private void ResetAttack()
