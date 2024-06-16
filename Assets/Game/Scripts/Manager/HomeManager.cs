@@ -13,6 +13,7 @@ public class HomeManager : Singleton<HomeManager>
     [SerializeField] private GameObject settingPanel;
     [SerializeField] private GameObject popup;
     [SerializeField] private Transform popupHolder;
+    [SerializeField] private GameObject instructionPanel;
 
     private List<GameObject> popups = new List<GameObject>();
     public GameObject homePanel;
@@ -61,6 +62,14 @@ public class HomeManager : Singleton<HomeManager>
     {
         startScene.SetActive(false);
         homeScene.SetActive(true);
+        var playerData = SODataManager.Instance.PlayerData;
+
+        if (playerData.numberOfInstruction < 1)
+        {
+            instructionPanel.SetActive(true);
+            playerData.numberOfInstruction++;
+            DataManager.Instance.SaveData(playerData);
+        }
         ButtonSoundClick();
         SettingManager.Instance.PlayMusic(ConstantSound.THEME);
     }

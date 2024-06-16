@@ -9,6 +9,7 @@ public class PlayerData
     public int golds;
     public int gems;
     public int stars;
+    public int numberOfInstruction;
 
     public float maxHp;
     public float maxMana;
@@ -24,7 +25,7 @@ public class PlayerData
 
     public PlayerData()
     {
-        golds = gems = stars = 0;
+        numberOfInstruction= golds = gems = stars = 0;
         maxHp = 1000;
         maxMana = maxEnergy = 100;
         damage = 15;
@@ -36,12 +37,13 @@ public class PlayerData
         shieldsOwned = new List<int>();
     }
 
-    public PlayerData(int golds, int gems, int stars, float maxHp, float maxMana, float maxEnergy,
+    public PlayerData(int golds, int gems, int stars, int numberOfInstruction, float maxHp, float maxMana, float maxEnergy,
         List<int> alliesOwned, List<int> skillsOwned, List<int> weaponsOwned, List<int> shieldsOwned)
     {
         this.golds = golds;
         this.gems = gems;
         this.stars = stars;
+        this.numberOfInstruction = numberOfInstruction;
         this.maxHp = maxHp;
         this.maxMana = maxMana;
         this.maxEnergy = maxEnergy;

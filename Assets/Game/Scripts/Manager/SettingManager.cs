@@ -8,9 +8,10 @@ using UnityEngine.UI;
 public class SettingManager : Singleton<SettingManager>
 {
     [SerializeField] private TMP_Dropdown qualityDropdown;
-    [SerializeField] private Button back;
+    [SerializeField] private Button back, instruction;
     [SerializeField] private GameObject settingPanel;
     [SerializeField] private Slider musicSlider, sfxSlider;
+    [SerializeField] private GameObject instructionPanel;
 
     public Sound[] musicSounds, sfxSounds;
     public AudioSource musicSource, sfxSource;
@@ -21,6 +22,7 @@ public class SettingManager : Singleton<SettingManager>
         back.onClick.AddListener(Back);
         musicSlider.onValueChanged.AddListener(MusicVolume);
         sfxSlider.onValueChanged.AddListener(SFXVolume);
+        instruction.onClick.AddListener(() => { instructionPanel.SetActive(true); });
 
     }
 

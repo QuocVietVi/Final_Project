@@ -2,7 +2,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
-using UnityEditorInternal;
 using UnityEngine;
 
 public class Player : Character
@@ -166,7 +165,7 @@ public class Player : Character
         slashDamage = data.PlayerData.damage;
         manaRecovery = data.PlayerData.manaRecovery;
         energyRecovery = data.PlayerData.energyRecovery;
-        Hp = maxHp;
+
         Mana = 0;
         Energy = 0;
 
@@ -222,6 +221,7 @@ public class Player : Character
         var sData = SODataManager.Instance.GetShieldData(setUpItems[6].shieldType);
         shield.sprite = sData.image;
         maxHp += sData.bonusHp;
+        Hp = maxHp;
     }
     private AllyData GetAllyData(AllyType type)
     {
